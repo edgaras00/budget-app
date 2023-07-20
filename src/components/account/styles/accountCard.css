@@ -1,0 +1,61 @@
+.account-container {
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 15px;
+  width: 50%;
+  height: 110px;
+
+  background: linear-gradient(
+    109.6deg,
+    rgb(0, 37, 84) 11.2%,
+    rgba(0, 37, 84, 0.32) 100.2%
+  );
+
+  color: #e9e9e9;
+
+  margin-bottom: 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.account-name {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.account-type {
+  font-size: 1.1rem;
+  margin-top: 0.3rem;
+}
+
+.account-balance {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.account-buttons {
+  text-align: center;
+}
+
+.account-edit {
+  margin-bottom: 1.3rem;
+}
+
+@media (max-width: 950px) {
+  .account-container {
+    width: 68%;
+  }
+}
+
+@media (max-width: 790px) {
+  .account-container {
+    width: 82%;
+  }
+}
+
+@media (max-width: 680px) {
+  .account-container {
+    width: 94%;
+  }
+}

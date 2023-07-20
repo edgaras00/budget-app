@@ -1,0 +1,58 @@
+.accounts-container {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-wrapper {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.accounts-heading {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 2.4rem;
+}
+
+.accounts {
+  margin-top: 2rem;
+}
+
+.add-account {
+  width: 14%;
+  height: 50px;
+  margin-bottom: 1.3rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+
+  background: black;
+
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.add-account:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 950px) {
+  .add-account {
+    width: 20%;
+  }
+}
+
+@media (max-width: 682px) {
+  .add-account {
+    width: 26%;
+  }
+}
+
+@media (max-width: 520px) {
+  .add-account {
+    width: 30%;
+  }
+}

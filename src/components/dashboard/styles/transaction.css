@@ -1,0 +1,124 @@
+.table-row td {
+  text-align: center;
+}
+
+.transaction {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.image-container {
+  width: 36px;
+  height: 36px;
+}
+
+.transction-name {
+  text-align: center;
+}
+
+.name-text {
+  font-weight: 800;
+  font-size: 1.05rem;
+  margin-bottom: 0.3rem;
+}
+
+.transaction-date {
+  font-size: 0.85rem;
+}
+
+.category {
+  font-size: 0.9rem;
+  border-radius: 10px;
+  text-align: center;
+  padding: 8px 0px;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.transaction-account {
+  text-align: center;
+}
+
+.subscription {
+  background-color: rgb(58, 58, 245, 0.15);
+  color: rgb(44, 44, 202);
+}
+
+.groceries {
+  background-color: rgba(224, 10, 224, 0.15);
+  color: rgb(189, 7, 189);
+}
+
+.household {
+  background-color: rgba(255, 165, 0, 0.15);
+  color: rgb(248, 161, 0);
+}
+
+.utilities {
+  background-color: rgba(0, 128, 128, 0.15);
+  color: rgb(0, 128, 128);
+}
+
+.savings {
+  background-color: rgba(0, 255, 0, 0.15);
+  color: rgb(28, 156, 28);
+}
+
+.income {
+  background-color: rgba(255, 215, 0, 0.15);
+  color: rgb(255, 215, 0);
+}
+
+.transportation {
+  background-color: rgba(0, 255, 191, 0.15);
+  color: rgb(67, 189, 158);
+}
+
+.healthcare {
+  background-color: rgba(255, 0, 0, 0.15);
+  color: rgb(255, 0, 0);
+}
+
+.education {
+  background-color: rgba(0, 0, 255, 0.15);
+  color: rgb(0, 0, 255);
+}
+
+.charity {
+  background-color: rgba(255, 20, 147, 0.15);
+  color: rgb(255, 20, 147);
+}
+
+.misc {
+  background-color: rgba(128, 128, 128, 0.15);
+  color: rgb(128, 128, 128);
+}
+
+.food-and-drink {
+  background-color: rgba(255, 69, 0, 0.15);
+  color: rgb(255, 69, 0);
+}
+
+.clothing {
+  background-color: rgba(128, 0, 128, 0.15);
+  color: rgb(128, 0, 128);
+}
+
+@media (max-width: 500px) {
+  .name-text,
+  .transaction-date {
+    font-size: 0.85rem;
+  }
+
+  .transaction-amount,
+  .payment-type,
+  .transaction-account {
+    font-size: 0.85rem;
+  }
+
+  .category {
+    font-size: 0.82rem;
+    padding: 6px 0px;
+  }
+}

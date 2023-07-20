@@ -1,0 +1,19 @@
+.modal-box {
+  width: 500px;
+}
+
+.close {
+  font-size: 1.6rem;
+  cursor: pointer;
+  display: none;
+}
+
+@media (max-width: 560px) {
+  .modal-box {
+    width: 450px;
+  }
+
+  .close {
+    display: block;
+  }
+}

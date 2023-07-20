@@ -1,0 +1,128 @@
+.activity-container {
+  width: 740px;
+  min-height: 250px;
+  margin-top: 2rem;
+  padding-top: 0.9rem;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.activity-top {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.activity-headers {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 2px solid rgb(192, 192, 192);
+  margin-top: 2rem;
+  padding-bottom: 1.5rem;
+}
+
+.activity-heading {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.activity-options {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+}
+
+.select-option {
+  border: 1px solid rgb(192, 192, 192);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 32px;
+  width: 123px;
+  padding: 1.4rem 0.4rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.empty-list {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.transaction-table {
+  margin-top: 1.8rem;
+  width: 100%;
+}
+
+.transaction-table th {
+  padding-bottom: 2rem;
+}
+
+.remove-th {
+  color: transparent;
+}
+
+.add {
+  cursor: pointer;
+}
+
+.add:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 750px) {
+  .activity-container {
+    width: 84%;
+  }
+
+  .activity-options {
+    width: 60%;
+  }
+}
+
+@media (max-width: 650px) {
+  .activity-options {
+    width: 68%;
+  }
+}
+
+@media (max-width: 630px) {
+  .activity-container {
+    width: 92%;
+  }
+}
+
+@media (max-width: 550px) {
+  .activity-container {
+    width: 95%;
+  }
+
+  .activity-options {
+    width: 56%;
+  }
+
+  .select-option {
+    width: 84px;
+  }
+  .select-option div {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .activity-container {
+    width: 98%;
+  }
+
+  .transaction-table th {
+    font-size: 0.9rem;
+  }
+}
