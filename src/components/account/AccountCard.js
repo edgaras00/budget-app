@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CustomModal from "../CustomModal";
+import CustomModal from "../dashboard/CustomModal";
 import AccountForm from "./AccountForm";
 import "./styles/accountCard.css";
 

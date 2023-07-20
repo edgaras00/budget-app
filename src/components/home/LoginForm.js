@@ -25,12 +25,9 @@ const LoginForm = () => {
       .max(30, "Password cannot be more than 30 characters"),
   });
 
-  const { register, handleSubmit, reset } =
-    useForm <
-    RequestBody >
-    {
-      resolver: yupResolver(schema),
-    };
+  const { register, handleSubmit, reset } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const onSubmit = async (data) => {
     try {

@@ -3,8 +3,8 @@ import "./styles/nav.css";
 const Nav = () => {
   const isLoggedIn = true;
   return (
-    <nav className={styles.navbar}>
-      <div className={styles["logo-container"]}>
+    <nav className="navbar">
+      <div className="logo-container">
         {/* <Link href="/" className={styles["logo-link"]}>
           <Image
             className={styles.logo}
@@ -21,7 +21,7 @@ const Nav = () => {
           {/* <Link className={styles.profile} href="/profile">
             Profile
           </Link> */}
-          <div className={styles.theme}>Light</div>
+          <div className="theme">Light</div>
           <div className={`button-container user-button`}>
             <button>Log Out</button>
           </div>

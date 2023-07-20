@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Transaction from "./Transaction";
-import CustomModal from "../CustomModal";
+import CustomModal from "./CustomModal";
 import TransactionForm from "./TransactionForm";
 
 import "./styles/activity.css";
@@ -63,7 +63,7 @@ const Activity = () => {
             /> */}
             <div>Select date</div>
           </div>
-          <div className={styles["select-option"]}>
+          <div className="select-option">
             {/* <Image
               src="assets/images/filter.svg"
               alt="select date"

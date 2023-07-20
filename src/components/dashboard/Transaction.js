@@ -2,7 +2,7 @@ import { useState } from "react";
 import dayjs from "dayjs";
 // import Image from "next/image";
 
-import CustomModal from "../CustomModal";
+import CustomModal from "./CustomModal";
 import TransactionForm from "./TransactionForm";
 
 import "./styles/transaction.css";
@@ -17,7 +17,7 @@ const dummyData = {
   logo: "https://logo.clearbit.com/spotify.com",
 };
 
-const centsToDollars = (amountCents: number) => {
+const centsToDollars = (amountCents) => {
   return amountCents / 100;
 };
 

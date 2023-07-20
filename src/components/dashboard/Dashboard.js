@@ -4,11 +4,14 @@ import Analytics from "./Analytics";
 import GoalsButton from "./GoalsButton";
 import "./styles/dashboard.css";
 
+import useAuth from "../../hooks/useAuth";
+
 // import useAuthentication from "../../hooks/useAuthentication";
 // import withAuth from "../../hooks/withAuth";
 
 const Dashboard = () => {
   //   useAuthentication();
+  useAuth();
   return (
     <div className="dashboard-container">
       <div className="goals-btn-container">

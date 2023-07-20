@@ -2,9 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { setRequestOptions } from "../utils/utils";
-
-import { RequestOptions, APIResponse, AccountRequestBody } from "../types/api";
+import { setRequestOptions } from "../../utils/utils";
 
 import "./styles/accountForm.css";
 
@@ -21,17 +19,14 @@ const AccountForm = ({ modify, accountId, name, accountType, balance }) => {
     balance: yup.number().required("Please enter your balance"),
   });
 
-  const { register, handleSubmit, reset } =
-    useForm <
-    AccountRequestBody >
-    {
-      resolver: yupResolver(schema),
-      defaultValues: {
-        name: modify ? name : "",
-        accountType: modify ? accountType : "",
-        balance: modify ? balance : 0,
-      },
-    };
+  const { register, handleSubmit, reset } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      name: modify ? name : "",
+      accountType: modify ? accountType : "",
+      balance: modify ? balance : 0,
+    },
+  });
 
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");

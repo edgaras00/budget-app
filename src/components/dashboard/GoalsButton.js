@@ -1,8 +1,8 @@
 import { useState } from "react";
 // import Link from "next/link";
 
-import CustomModal from "../CustomModal";
-import BudgetForm from "../BudgetForm";
+import CustomModal from "./CustomModal";
+// import BudgetForm from "../BudgetForm";
 
 import "./styles/goalsButton.css";
 
@@ -28,7 +28,7 @@ const GoalsButton = ({ text, type = 1, link }) => {
       <CustomModal
         open={isModalOpen}
         handleClose={handleModalClose}
-        form={<BudgetForm />}
+        // form={<BudgetForm />}
       />
     </div>
   );

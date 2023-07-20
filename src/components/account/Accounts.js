@@ -8,9 +8,12 @@ import EmptyPage from "./EmptyPage";
 
 import { setRequestOptions } from "../../utils/utils";
 
+import useAuth from "../../hooks/useAuth";
+
 import "./styles/accounts.css";
 
 const Accounts = () => {
+  useAuth();
   const [accounts, setAccounts] = useState([]);
   const [totalBalance, setTotalBalance] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
