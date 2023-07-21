@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useRedirect from "../../hooks/useRedirect";
 import "./styles/home.css";
 
@@ -21,7 +22,9 @@ const Home = () => {
         </div>
       </div>
       <div className="home-start">
-        <button>Get Started</button>
+        <Link to="/signup">
+          <button>Get Started</button>
+        </Link>
       </div>
     </main>
   );

@@ -6,8 +6,6 @@ import CustomModal from "../dashboard/CustomModal";
 import AccountForm from "./AccountForm";
 import EmptyPage from "./EmptyPage";
 
-import { setRequestOptions } from "../../utils/utils";
-
 import useAuth from "../../hooks/useAuth";
 
 import "./styles/accounts.css";
@@ -15,29 +13,31 @@ import "./styles/accounts.css";
 const Accounts = () => {
   useAuth();
   const [accounts, setAccounts] = useState([]);
+  const [formSubmit, setFormSubmit] = useState(0);
   const [totalBalance, setTotalBalance] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
+  console.log(formSubmit);
+
+  const rerenderAfterSubmit = () =>
+    setFormSubmit((submission) => submission + 1);
+
   useEffect(() => {
     const fetchAccounts = async () => {
       try {
         const token = localStorage.getItem("token");
-        console.log(token);
 
         if (!token) {
           return;
         }
 
-        const response: Response = await fetch(
-          "http://localhost:5000/api/account/user",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await fetch("http://localhost:5000/api/account/user", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const responseData = await response.json();
         console.log(responseData);
         setAccounts(responseData.data.accounts);
@@ -47,7 +47,7 @@ const Accounts = () => {
       }
     };
     fetchAccounts();
-  }, []);
+  }, [formSubmit]);
 
   const accountCards = accounts.map((account) => {
     return (
@@ -57,6 +57,7 @@ const Accounts = () => {
         name={account.name}
         accountType={account.accountType}
         balance={account.balance}
+        rerenderAfterSubmit={rerenderAfterSubmit}
       />
     );
   });
@@ -70,12 +71,7 @@ const Accounts = () => {
             Add Account
           </button>
           <AccountTotal totalBalance={totalBalance} />
-          <div className="accounts">
-            {/* <AccountCard />
-            <AccountCard />
-            <AccountCard /> */}
-            {accountCards}
-          </div>
+          <div className="accounts">{accountCards}</div>
         </div>
       ) : (
         <EmptyPage missingData="account" openModal={handleOpenModal} />
@@ -83,7 +79,12 @@ const Accounts = () => {
       <CustomModal
         open={isModalOpen}
         handleClose={handleCloseModal}
-        form={<AccountForm />}
+        form={
+          <AccountForm
+            handleClose={handleCloseModal}
+            rerenderAfterSubmit={rerenderAfterSubmit}
+          />
+        }
       />
     </div>
   );

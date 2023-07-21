@@ -10,6 +10,11 @@
   align-items: center;
 }
 
+.signup-form a {
+  text-decoration: none;
+  color: #000000;
+}
+
 .signup-form input {
   width: 50%;
   height: 40px;

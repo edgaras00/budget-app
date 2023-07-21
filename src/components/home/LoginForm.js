@@ -1,17 +1,14 @@
-// import { useContext } from "react";
-
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
-// import { AuthContext } from "../context/AuthContext";
 
 import { setRequestOptions } from "../../utils/utils";
 
 import "./styles/signupForm.css";
 
 const LoginForm = () => {
-  // const { setUser, setToken } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const schema = yup.object().shape({
     email: yup
@@ -49,6 +46,8 @@ const LoginForm = () => {
       // setToken(responseData.token);
       localStorage.setItem("token", responseData.token);
 
+      navigate("/dashboard");
+
       reset();
     } catch (error) {
       console.log(error);
@@ -73,9 +72,9 @@ const LoginForm = () => {
         <button type="submit">Log in</button>
         <p className="signup-account">
           Don't have an account?{" "}
-          {/* <Link href="/signup" className="signup-link">
+          <Link to="/signup" className="signup-link">
             Sign up
-          </Link> */}
+          </Link>
         </p>
       </form>
     </div>

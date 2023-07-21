@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import logo from "../../images/nblogo.svg";
 import "./styles/nav.css";
 
 const Nav = () => {
@@ -5,24 +7,24 @@ const Nav = () => {
   return (
     <nav className="navbar">
       <div className="logo-container">
-        {/* <Link href="/" className={styles["logo-link"]}>
-          <Image
-            className={styles.logo}
-            src="assets/images/nblogo.svg"
-            alt="logo"
+        <Link to="/" className="logo-link">
+          <img
+            className="logo"
+            src={logo}
+            alt="app logo"
             width={60}
             height={60}
           />
-          <div className={styles["app-name"]}>NextBudget</div>
-        </Link> */}
+          <div className="app-name">NextBudget</div>
+        </Link>
       </div>
       {isLoggedIn ? (
         <div className="user-nav">
-          {/* <Link className={styles.profile} href="/profile">
+          <Link className="profile" to="/profile">
             Profile
-          </Link> */}
+          </Link>
           <div className="theme">Light</div>
-          <div className={`button-container user-button`}>
+          <div className="button-container user-button">
             <button>Log Out</button>
           </div>
         </div>

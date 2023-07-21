@@ -3,13 +3,20 @@ import Transaction from "./Transaction";
 import CustomModal from "./CustomModal";
 import TransactionForm from "./TransactionForm";
 
+import dateImage from "../../images/date.svg";
+import filterImage from "../../images/filter.svg";
+import newTxnImage from "../../images/add.svg";
+
 import "./styles/activity.css";
 
 const Activity = () => {
   const [transactions, setTransactions] = useState([]);
+  const [formSubmitted, setFormSubmitted] = useState(0);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const rerenderAfterSubmit = () => setFormSubmitted((submit) => submit + 1);
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -33,7 +40,7 @@ const Activity = () => {
       }
     };
     fetchTransactions();
-  }, []);
+  }, [formSubmitted]);
 
   const transactionComponents = transactions.map((transaction) => {
     return (
@@ -45,6 +52,7 @@ const Activity = () => {
         date={transaction.date}
         category={transaction.category.name}
         account={transaction.account ? transaction.account.name : ""}
+        rerenderAfterSubmit={rerenderAfterSubmit}
       />
     );
   });
@@ -55,31 +63,26 @@ const Activity = () => {
         <div className="activity-heading">Transactions</div>
         <div className="activity-options">
           <div className="select-option">
-            {/* <Image
-              src="assets/images/date.svg"
-              alt="select date"
-              width={28}
-              height={28}
-            /> */}
+            <img src={dateImage} alt="select date" width={28} height={28} />
             <div>Select date</div>
           </div>
           <div className="select-option">
-            {/* <Image
-              src="assets/images/filter.svg"
-              alt="select date"
+            <img
+              src={filterImage}
+              alt="filter transactions"
               width={28}
               height={28}
-            /> */}
+            />
             <div>Apply filter</div>
           </div>
-          {/* <Image
-            className={styles.add}
-            onClick={handleOpen}
-            src="assets/images/add.svg"
-            alt="add transaction"
+          <img
+            src={newTxnImage}
+            alt="add new transaction"
             width={44}
             height={44}
-          /> */}
+            className="add"
+            onClick={handleOpen}
+          />
         </div>
       </div>
       {transactions.length === 0 ? (
@@ -104,7 +107,12 @@ const Activity = () => {
       <CustomModal
         open={open}
         handleClose={handleClose}
-        form={<TransactionForm />}
+        form={
+          <TransactionForm
+            rerenderAfterSubmit={rerenderAfterSubmit}
+            handleClose={handleClose}
+          />
+        }
       />
     </div>
   );

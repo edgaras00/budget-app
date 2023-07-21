@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -14,6 +15,8 @@ const TransactionForm = ({
   date,
   account,
   category,
+  rerenderAfterSubmit,
+  handleClose,
   amount,
 }) => {
   const [accounts, setAccounts] = useState([]);
@@ -55,6 +58,8 @@ const TransactionForm = ({
     fetchAccounts();
   }, []);
 
+  console.log(accounts);
+
   const accountOptions = accounts.map((account) => {
     return (
       <option
@@ -88,12 +93,9 @@ const TransactionForm = ({
     defaultValues: {
       transactionName: modify ? name : "",
       amount: modify ? amount : 0,
-      category: modify ? category : null,
-      account: modify ? account : null,
       transactionDate: modify ? date : "",
     },
   });
-  console.log(category);
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -117,16 +119,22 @@ const TransactionForm = ({
         accountId: selectedAccount.id,
       };
 
-      const requestOptions = setRequestOptions("POST", requestBody, token);
+      const requestOptions = setRequestOptions(
+        modify ? "PATCH" : "POST",
+        requestBody,
+        token
+      );
 
       console.log(requestOptions);
-
-      const response = await fetch(
-        "http://localhost:5000/api/transactions/",
-        requestOptions
-      );
+      const url = modify
+        ? `http://localhost:5000/api/transactions/${id}`
+        : "http://localhost:5000/api/transactions";
+      const response = await fetch(url, requestOptions);
       const responseData = await response.json();
       console.log(responseData);
+
+      rerenderAfterSubmit();
+      handleClose();
     } catch (error) {
       console.log(error);
     }
@@ -152,7 +160,7 @@ const TransactionForm = ({
         </div>
         <div className="input-wrapper">
           <label>Category</label>
-          <select {...register("category")} value={modify ? category : ""}>
+          <select {...register("category")}>
             <option>-- Select --</option>
             {categoryOptions}
           </select>
@@ -160,13 +168,19 @@ const TransactionForm = ({
         <div className="input-wrapper">
           <label>Account / Type</label>
           {/* <input type="text" {...register("account")} /> */}
-          <select {...register("account")} value={modify ? account : ""}>
+          <select {...register("account")}>
             <option>-- Select --</option>
-            <option>Cash</option>
             {accountOptions}
           </select>
         </div>
-        <button type="submit">Save</button>
+        {accounts.length === 0 ? (
+          <div>
+            Please <Link to="/accounts">add an account</Link> before submitting
+            a transaction
+          </div>
+        ) : (
+          <button type="submit">Save</button>
+        )}
       </form>
     </div>
   );

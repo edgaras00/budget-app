@@ -6,7 +6,15 @@ import { setRequestOptions } from "../../utils/utils";
 
 import "./styles/accountForm.css";
 
-const AccountForm = ({ modify, accountId, name, accountType, balance }) => {
+const AccountForm = ({
+  modify,
+  accountId,
+  name,
+  accountType,
+  balance,
+  handleClose,
+  rerenderAfterSubmit,
+}) => {
   const schema = yup.object().shape({
     name: yup
       .string()
@@ -30,7 +38,6 @@ const AccountForm = ({ modify, accountId, name, accountType, balance }) => {
 
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
-    console.log(data);
     try {
       let requestBody = data;
       const requestOptions = setRequestOptions(
@@ -39,17 +46,17 @@ const AccountForm = ({ modify, accountId, name, accountType, balance }) => {
         token
       );
 
-      console.log(requestOptions);
-
       const url = modify
         ? `http://localhost:5000/api/account/${accountId}`
         : "http://localhost:5000/api/account";
       const response = await fetch(url, requestOptions);
-      const responseData = await response.json();
 
-      console.log(responseData);
+      if (!response.ok) throw new Error("Something went wrong");
+      console.log("here");
+      rerenderAfterSubmit();
 
       reset();
+      handleClose();
     } catch (error) {
       console.log(error);
     }

@@ -3,7 +3,13 @@ import CustomModal from "../dashboard/CustomModal";
 import AccountForm from "./AccountForm";
 import "./styles/accountCard.css";
 
-const AccountCard = ({ name, accountType, balance, id }) => {
+const AccountCard = ({
+  name,
+  accountType,
+  balance,
+  id,
+  rerenderAfterSubmit,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
@@ -11,12 +17,14 @@ const AccountCard = ({ name, accountType, balance, id }) => {
   const removeAccount = async () => {
     const token = localStorage.getItem("token");
     try {
-      await fetch(`http://localhost:5000/api/account/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/account/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      if (!response.ok) throw new Error("Something went wronf");
+      rerenderAfterSubmit();
     } catch (error) {
       console.log(error);
     }
@@ -45,6 +53,8 @@ const AccountCard = ({ name, accountType, balance, id }) => {
             name={name}
             accountType={accountType}
             balance={balance}
+            rerenderAfterSubmit={rerenderAfterSubmit}
+            handleClose={handleCloseModal}
           />
         }
       />
