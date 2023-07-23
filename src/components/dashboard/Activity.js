@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Transaction from "./Transaction";
 import CustomModal from "./CustomModal";
 import TransactionForm from "./TransactionForm";
+import FilterForm from "./FilterForm";
 
 import dateImage from "../../images/date.svg";
 import filterImage from "../../images/filter.svg";
@@ -12,6 +13,11 @@ import "./styles/activity.css";
 const Activity = () => {
   const [transactions, setTransactions] = useState([]);
   const [formSubmitted, setFormSubmitted] = useState(0);
+
+  const [filterOpen, setFilterOpen] = useState(false);
+  const handleFilterOpen = () => setFilterOpen(true);
+  const handleFilterClose = () => setFilterOpen(false);
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -52,6 +58,7 @@ const Activity = () => {
         date={transaction.date}
         category={transaction.category.name}
         account={transaction.account ? transaction.account.name : ""}
+        accountType={transaction.account ? transaction.account.accountType : ""}
         rerenderAfterSubmit={rerenderAfterSubmit}
       />
     );
@@ -62,11 +69,7 @@ const Activity = () => {
       <div className="activity-top">
         <div className="activity-heading">Transactions</div>
         <div className="activity-options">
-          <div className="select-option">
-            <img src={dateImage} alt="select date" width={28} height={28} />
-            <div>Select date</div>
-          </div>
-          <div className="select-option">
+          <div className="select-option" onClick={handleFilterOpen}>
             <img
               src={filterImage}
               alt="filter transactions"
@@ -111,6 +114,16 @@ const Activity = () => {
           <TransactionForm
             rerenderAfterSubmit={rerenderAfterSubmit}
             handleClose={handleClose}
+          />
+        }
+      />
+      <CustomModal
+        open={filterOpen}
+        handleClose={handleFilterClose}
+        form={
+          <FilterForm
+            rerenderAfterSubmit={rerenderAfterSubmit}
+            handleClose={handleFilterClose}
           />
         }
       />

@@ -38,10 +38,12 @@ const AccountCard = ({
       </div>
       <div className="account-balance">{balance}</div>
       <div className="account-buttons">
-        <div onClick={handleOpenModal} className="account-edit">
+        <div onClick={handleOpenModal} className="account-action edit">
           Edit
         </div>
-        <div onClick={removeAccount}>Remove</div>
+        <div onClick={removeAccount} className="account-action">
+          Remove
+        </div>
       </div>
       <CustomModal
         open={isModalOpen}

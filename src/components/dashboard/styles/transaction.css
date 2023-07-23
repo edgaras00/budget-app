@@ -1,5 +1,6 @@
 .table-row td {
   text-align: center;
+  margin-bottom: 1.3rem;
 }
 
 .transaction {
@@ -11,10 +12,18 @@
 .image-container {
   width: 36px;
   height: 36px;
+  text-align: center;
 }
 
-.transction-name {
+.image-container img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.transaction-name {
   text-align: center;
+  width: 130px;
 }
 
 .name-text {
@@ -38,6 +47,19 @@
 
 .transaction-account {
   text-align: center;
+}
+
+.txn-account-type {
+  font-size: 0.8rem;
+}
+
+.edit-txn {
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+.edit-txn:hover {
+  opacity: 0.7;
 }
 
 .subscription {

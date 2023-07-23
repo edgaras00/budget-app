@@ -38,8 +38,17 @@
   text-align: center;
 }
 
-.account-edit {
-  margin-bottom: 1.3rem;
+.account-action {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.edit {
+  margin-bottom: 1.2rem;
+}
+
+.account-action:hover {
+  opacity: 0.8;
 }
 
 @media (max-width: 950px) {

@@ -1,0 +1,46 @@
+.amounts {
+  display: flex;
+  width: 70%;
+  justify-content: space-around;
+  margin-bottom: 0.5rem;
+}
+
+.filter-amount input {
+  width: 140px;
+}
+
+.accounts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.category-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.option-heading {
+  margin-bottom: 0.8rem;
+}
+
+.account-options {
+  width: 90%;
+  display: flex;
+}
+
+.checkbox {
+  font-size: 0.8rem;
+}
+
+.category-check {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox input {
+  width: 24px;
+  height: 24px;
+}

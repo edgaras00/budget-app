@@ -27,6 +27,7 @@ const Transaction = ({
   amount,
   category,
   account,
+  accountType,
   date,
   id,
   rerenderAfterSubmit,
@@ -67,8 +68,6 @@ const Transaction = ({
                 : `https://logo.clearbit.com/${name}.com`
             }
             alt="Transaction icon"
-            width={35}
-            height={35}
             onError={handleImageError}
           />
         </div>
@@ -84,12 +83,16 @@ const Transaction = ({
         <div className={`category ${category.toLowerCase()}`}>{category}</div>
       </td>
       <td className="transaction-account">
-        <div className="transaction-type">{account}</div>
-        <div className="transaction-account-name">{account}</div>
+        <div className="txn-account-name">{account}</div>
+        <div className="txn-account-type">{accountType}</div>
       </td>
-      <td className="transaction-remove">
-        <div onClick={handleModalOpen}>Edit</div>
-        <div onClick={removeTransaction}>Remove</div>
+      <td className="transaction-edit">
+        <div onClick={handleModalOpen} className="edit-txn">
+          Edit
+        </div>
+        <div onClick={removeTransaction} className="edit-txn">
+          Remove
+        </div>
         <CustomModal
           open={isModalOpen}
           handleClose={handleModalClose}

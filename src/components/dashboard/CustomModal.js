@@ -9,12 +9,14 @@ const CustomModal = ({ open, handleClose, form }) => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
+    height: "86vh",
     // width: 500,
     bgcolor: "background.paper",
     boxShadow: 24,
     p: 4,
     border: "none",
     borderRadius: "8px",
+    overflowY: "auto",
   };
   return (
     <div>

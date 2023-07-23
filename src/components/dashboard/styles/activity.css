@@ -1,5 +1,5 @@
 .activity-container {
-  width: 740px;
+  width: 780px;
   min-height: 250px;
   margin-top: 2rem;
   padding-top: 0.9rem;
@@ -32,8 +32,9 @@
 
 .activity-options {
   display: flex;
-  justify-content: space-around;
-  width: 50%;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 40%;
 }
 
 .select-option {
@@ -42,11 +43,15 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: 32px;
-  width: 123px;
+  height: 18px;
+  width: 110px;
   padding: 1.4rem 0.4rem;
   font-size: 0.9rem;
   cursor: pointer;
+}
+
+.select-option:hover {
+  background-color: rgb(243, 243, 243);
 }
 
 .empty-list {

@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import dayjs from "dayjs";
 
-import { setRequestOptions } from "../../utils/utils";
+import { setRequestOptions, fetchAccountCategoryData } from "../../utils/utils";
 
 import "./styles/transactionForm.css";
 
@@ -22,43 +23,41 @@ const TransactionForm = ({
   const [accounts, setAccounts] = useState([]);
   const [categories, setCategories] = useState([]);
 
-  console.log(date);
-
   useEffect(() => {
-    const fetchAccounts = async () => {
+    const fetchAccountsAndCategories = async () => {
       try {
-        const token = localStorage.getItem("token");
-        console.log(token);
+        const accountData = await fetchAccountCategoryData("account");
+        const categoryData = await fetchAccountCategoryData("category");
+        // const token = localStorage.getItem("token");
+        // console.log(token);
 
-        if (!token) return;
+        // if (!token) return;
 
-        const accountResponse = await fetch(
-          "http://localhost:5000/api/account/user",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        // const accountResponse = await fetch(
+        //   "http://localhost:5000/api/account/user",
+        //   {
+        //     headers: { Authorization: `Bearer ${token}` },
+        //   }
+        // );
 
-        const accountResponseData = await accountResponse.json();
+        // const accountResponseData = await accountResponse.json();
 
-        const categoryResponse = await fetch(
-          "http://localhost:5000/api/category"
-        );
-        const categoryResponseData = await categoryResponse.json();
+        // const categoryResponse = await fetch(
+        //   "http://localhost:5000/api/category"
+        // );
+        // const categoryResponseData = await categoryResponse.json();
 
-        console.log(accountResponseData);
-        console.log(categoryResponseData);
+        // console.log(accountResponseData);
+        // console.log(categoryResponseData);
 
-        setAccounts(accountResponseData.data.accounts);
-        setCategories(categoryResponseData.data.categories);
+        setAccounts(accountData.accounts);
+        setCategories(categoryData.categories);
       } catch (error) {
         console.log(error);
       }
     };
-    fetchAccounts();
+    fetchAccountsAndCategories();
   }, []);
-
-  console.log(accounts);
 
   const accountOptions = accounts.map((account) => {
     return (
@@ -114,7 +113,7 @@ const TransactionForm = ({
       const requestBody = {
         name: data.transactionName,
         amount: data.amount,
-        date: data.transactionDate,
+        date: dayjs(data.transactionDate).format("YYYY-MM-DD"),
         categoryId: selectedCategory.id,
         accountId: selectedAccount.id,
       };
@@ -125,13 +124,11 @@ const TransactionForm = ({
         token
       );
 
-      console.log(requestOptions);
       const url = modify
         ? `http://localhost:5000/api/transactions/${id}`
         : "http://localhost:5000/api/transactions";
       const response = await fetch(url, requestOptions);
       const responseData = await response.json();
-      console.log(responseData);
 
       rerenderAfterSubmit();
       handleClose();
