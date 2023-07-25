@@ -13,6 +13,10 @@
   justify-content: space-between;
 }
 
+.account-total-container-dark {
+  background: #333333;
+}
+
 .total-text-wrapper {
   width: 80%;
   margin-top: 1.5rem;

@@ -7,7 +7,9 @@ import FilterForm from "./FilterForm";
 import { ThemeContext } from "../../context/themeContext";
 
 import filterImage from "../../images/filter.svg";
+import filterImageDark from "../../images/filter-dark.svg";
 import newTxnImage from "../../images/add.svg";
+import newTxnImageDark from "../../images/add-dark.svg";
 
 import "./styles/activity.css";
 
@@ -75,9 +77,14 @@ const Activity = () => {
       <div className="activity-top">
         <div className="activity-heading">Transactions</div>
         <div className="activity-options">
-          <div className="select-option" onClick={handleFilterOpen}>
+          <div
+            className={`select-option ${
+              theme === "dark" ? "select-option-dark" : null
+            }`}
+            onClick={handleFilterOpen}
+          >
             <img
-              src={filterImage}
+              src={theme === "dark" ? filterImageDark : filterImage}
               alt="filter transactions"
               width={28}
               height={28}
@@ -85,7 +92,7 @@ const Activity = () => {
             <div>Apply filter</div>
           </div>
           <img
-            src={newTxnImage}
+            src={theme === "dark" ? newTxnImageDark : newTxnImage}
             alt="add new transaction"
             width={44}
             height={44}

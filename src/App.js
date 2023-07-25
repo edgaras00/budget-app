@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 
 // Home components
@@ -12,11 +13,14 @@ import Dashboard from "./components/dashboard/Dashboard";
 // Accounts components
 import Accounts from "./components/account/Accounts";
 
+import { ThemeContext } from "./context/themeContext";
+
 import "./App.css";
 
 function App() {
+  const { theme } = useContext(ThemeContext);
   return (
-    <div>
+    <div className={`app ${theme === "dark" ? "app-dark" : null}`}>
       <Nav />
       <Routes>
         <Route exact path="/" element={<Home />} />

@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
+import { ThemeContext } from "../../context/themeContext";
 
 import { setRequestOptions } from "../../utils/utils";
 
@@ -15,6 +18,7 @@ const AccountForm = ({
   handleClose,
   rerenderAfterSubmit,
 }) => {
+  const { theme } = useContext(ThemeContext);
   const schema = yup.object().shape({
     name: yup
       .string()
@@ -63,7 +67,11 @@ const AccountForm = ({
   };
 
   return (
-    <div className="account-form-container">
+    <div
+      className={`account-form-container ${
+        theme === "dark" ? "account-form-container-dark" : null
+      }`}
+    >
       <div className="account-form-heading">
         <h1>{modify ? "Modify" : "Add"} Account</h1>
       </div>

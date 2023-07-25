@@ -1,7 +1,10 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../context/themeContext";
+
 import logo from "../../images/nblogo.svg";
+import logoDark from "../../images/nblogo-dark.svg";
+
 import "./styles/nav.css";
 
 const Nav = () => {
@@ -15,7 +18,7 @@ const Nav = () => {
         <Link to="/" className="logo-link">
           <img
             className="logo"
-            src={logo}
+            src={theme === "dark" ? logoDark : logo}
             alt="app logo"
             width={60}
             height={60}

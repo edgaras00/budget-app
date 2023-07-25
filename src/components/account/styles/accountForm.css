@@ -3,6 +3,10 @@
   width: 100%;
 }
 
+.account-form-container-dark {
+  color: #fff;
+}
+
 .account-form-heading {
   width: 100%;
   text-align: center;

@@ -9,7 +9,7 @@
   width: 140px;
 }
 
-.accounts {
+.filter-accounts {
   display: flex;
   flex-direction: column;
   align-items: center;

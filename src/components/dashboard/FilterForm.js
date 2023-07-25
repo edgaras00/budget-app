@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
+import { ThemeContext } from "../../context/themeContext";
 
 import { fetchAccountCategoryData } from "../../utils/utils";
 
@@ -9,6 +11,7 @@ import "./styles/transactionForm.css";
 import "./styles/filterForm.css";
 
 const FilterForm = ({ handleClose, setTransactions }) => {
+  const { theme } = useContext(ThemeContext);
   const [categories, setCategories] = useState([]);
   const [accounts, setAccounts] = useState([]);
 
@@ -153,7 +156,11 @@ const FilterForm = ({ handleClose, setTransactions }) => {
   ));
 
   return (
-    <div className="transaction-form-container">
+    <div
+      className={`transaction-form-container ${
+        theme === "dark" ? "transaction-form-container-dark" : null
+      }`}
+    >
       <div className="transaction-form-heading">
         <h1>Filter Transactions</h1>
       </div>
@@ -176,11 +183,11 @@ const FilterForm = ({ handleClose, setTransactions }) => {
           <label>End date</label>
           <input type="date" {...register("endDate")} />
         </div> */}
-        <div className="accounts">
+        <div className="filter-accounts">
           <div className="option-heading">Accounts</div>
           <div className="account-options">{accountOptions}</div>
         </div>
-        <div className="accounts">
+        <div className="filter-accounts">
           <div className="option-heading">Categories</div>
           <div className="category-options">{categoryOptions}</div>
         </div>

@@ -3,6 +3,11 @@
   width: 100%;
 }
 
+.transaction-form-container-dark {
+  background-color: #4e4e4e;
+  color: #fff;
+}
+
 .transaction-form-heading {
   width: 100%;
   text-align: center;

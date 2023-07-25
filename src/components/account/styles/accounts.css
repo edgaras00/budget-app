@@ -3,17 +3,25 @@
   justify-content: center;
 }
 
+.accounts-container-dark {
+  background-color: #121212;
+}
+
 .flex-wrapper {
   width: 80%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .accounts-heading {
   margin-top: 1.5rem;
   margin-bottom: 1rem;
   font-size: 2.4rem;
+}
+
+.accounts-heading-dark {
+  color: #ffffff;
 }
 
 .accounts {
@@ -37,6 +45,14 @@
 
 .add-account:hover {
   opacity: 0.8;
+}
+
+.add-account-dark {
+  background: linear-gradient(
+    109.6deg,
+    rgb(0, 37, 84) 11.2%,
+    rgba(3, 61, 136, 0.32) 100.2%
+  );
 }
 
 @media (max-width: 950px) {

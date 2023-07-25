@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import dayjs from "dayjs";
+
+import { ThemeContext } from "../../context/themeContext";
 
 import { setRequestOptions, fetchAccountCategoryData } from "../../utils/utils";
 
@@ -20,6 +22,7 @@ const TransactionForm = ({
   handleClose,
   amount,
 }) => {
+  const { theme } = useContext(ThemeContext);
   const [accounts, setAccounts] = useState([]);
   const [categories, setCategories] = useState([]);
 
@@ -28,27 +31,6 @@ const TransactionForm = ({
       try {
         const accountData = await fetchAccountCategoryData("account");
         const categoryData = await fetchAccountCategoryData("category");
-        // const token = localStorage.getItem("token");
-        // console.log(token);
-
-        // if (!token) return;
-
-        // const accountResponse = await fetch(
-        //   "http://localhost:5000/api/account/user",
-        //   {
-        //     headers: { Authorization: `Bearer ${token}` },
-        //   }
-        // );
-
-        // const accountResponseData = await accountResponse.json();
-
-        // const categoryResponse = await fetch(
-        //   "http://localhost:5000/api/category"
-        // );
-        // const categoryResponseData = await categoryResponse.json();
-
-        // console.log(accountResponseData);
-        // console.log(categoryResponseData);
 
         setAccounts(accountData.accounts);
         setCategories(categoryData.categories);
@@ -138,7 +120,11 @@ const TransactionForm = ({
   };
 
   return (
-    <div className="transaction-form-container">
+    <div
+      className={`transaction-form-container ${
+        theme === "dark" ? "transaction-form-container-dark" : null
+      }`}
+    >
       <div className="transaction-form-heading">
         <h1>Add Transaction</h1>
       </div>

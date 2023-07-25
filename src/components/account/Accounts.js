@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import AccountTotal from "./AccountTotal";
 import AccountCard from "./AccountCard";
@@ -6,12 +6,17 @@ import CustomModal from "../dashboard/CustomModal";
 import AccountForm from "./AccountForm";
 import EmptyPage from "./EmptyPage";
 
+import { ThemeContext } from "../../context/themeContext";
+
 import useAuth from "../../hooks/useAuth";
 
 import "./styles/accounts.css";
 
 const Accounts = () => {
   useAuth();
+
+  const { theme } = useContext(ThemeContext);
+
   const [accounts, setAccounts] = useState([]);
   const [formSubmit, setFormSubmit] = useState(0);
   const [totalBalance, setTotalBalance] = useState(0);
@@ -63,11 +68,26 @@ const Accounts = () => {
   });
 
   return (
-    <div className="accounts-container">
+    <div
+      className={`accounts-container ${
+        theme === "dark" ? "accounts-container-dark" : null
+      }`}
+    >
       {accounts.length > 0 ? (
         <div className="flex-wrapper">
-          <h1 className="accounts-heading">Accounts</h1>
-          <button className="add-account" onClick={handleOpenModal}>
+          <h1
+            className={`accounts-heading ${
+              theme === "dark" ? "accounts-heading-dark" : null
+            }`}
+          >
+            Accounts
+          </h1>
+          <button
+            className={`add-account ${
+              theme === "dark" ? "add-account-dark" : null
+            }`}
+            onClick={handleOpenModal}
+          >
             Add Account
           </button>
           <AccountTotal totalBalance={totalBalance} />
