@@ -8,7 +8,7 @@ import { fetchAccountCategoryData } from "../../utils/utils";
 import "./styles/transactionForm.css";
 import "./styles/filterForm.css";
 
-const FilterForm = () => {
+const FilterForm = ({ handleClose, setTransactions }) => {
   const [categories, setCategories] = useState([]);
   const [accounts, setAccounts] = useState([]);
 
@@ -86,6 +86,8 @@ const FilterForm = () => {
     });
     const responseData = await response.json();
     console.log(responseData);
+    setTransactions(responseData.data.transactions);
+    handleClose();
   };
 
   const accountOptions = accounts.map((account) => (

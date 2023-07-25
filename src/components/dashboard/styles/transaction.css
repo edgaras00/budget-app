@@ -3,6 +3,10 @@
   margin-bottom: 1.3rem;
 }
 
+.table-row-dark {
+  border: 1px solid red;
+}
+
 .transaction {
   display: flex;
   justify-content: space-evenly;

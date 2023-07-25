@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Transaction from "./Transaction";
 import CustomModal from "./CustomModal";
 import TransactionForm from "./TransactionForm";
 import FilterForm from "./FilterForm";
 
-import dateImage from "../../images/date.svg";
+import { ThemeContext } from "../../context/themeContext";
+
 import filterImage from "../../images/filter.svg";
 import newTxnImage from "../../images/add.svg";
 
 import "./styles/activity.css";
 
 const Activity = () => {
+  const { theme } = useContext(ThemeContext);
+
   const [transactions, setTransactions] = useState([]);
   const [formSubmitted, setFormSubmitted] = useState(0);
 
@@ -38,7 +41,6 @@ const Activity = () => {
           }
         );
         const responseData = await response.json();
-        console.log(responseData);
 
         setTransactions(responseData.data.transactions);
       } catch (error) {
@@ -65,7 +67,11 @@ const Activity = () => {
   });
 
   return (
-    <div className="activity-container">
+    <div
+      className={`activity-container ${
+        theme === "dark" ? "activity-container-dark" : null
+      }`}
+    >
       <div className="activity-top">
         <div className="activity-heading">Transactions</div>
         <div className="activity-options">
@@ -124,6 +130,7 @@ const Activity = () => {
           <FilterForm
             rerenderAfterSubmit={rerenderAfterSubmit}
             handleClose={handleFilterClose}
+            setTransactions={setTransactions}
           />
         }
       />

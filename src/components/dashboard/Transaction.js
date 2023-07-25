@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import dayjs from "dayjs";
 
 import CustomModal from "./CustomModal";
 import TransactionForm from "./TransactionForm";
+
+import { ThemeContext } from "../../context/themeContext";
 
 import defaultImage from "../../images/default.svg";
 
@@ -32,6 +34,7 @@ const Transaction = ({
   id,
   rerenderAfterSubmit,
 }) => {
+  const { theme } = useContext(ThemeContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModalOpen = () => setIsModalOpen(true);
   const handleModalClose = () => setIsModalOpen(false);
@@ -58,7 +61,7 @@ const Transaction = ({
   };
 
   return (
-    <tr className="table-row">
+    <tr className={`table-row ${theme === "dark" ? "table-row-dark" : null}`}>
       <td className="transaction">
         <div className="image-container">
           <img

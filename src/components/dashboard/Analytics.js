@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 import {
   BarChart,
   Bar,
@@ -58,13 +60,34 @@ const data = [
 ];
 
 const Analytics = () => {
+  const [monthlySpending, setMonthlySpending] = useState([]);
+
+  useEffect(() => {
+    const fetchMonthlySpending = async () => {
+      const token = localStorage.getItem("token");
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/transactions/monthly",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        const responseData = await response.json();
+        setMonthlySpending(responseData.data.monthlyTransactions);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchMonthlySpending();
+  }, []);
+
   return (
     <div className="container">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={500}
           height={300}
-          data={data}
+          data={monthlySpending}
           margin={{
             top: 5,
             right: 30,
@@ -77,12 +100,12 @@ const Analytics = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="subscriptions" fill="#8884d8" />
+          <Bar dataKey="Misc" fill="#8884d8" />
+          <Bar dataKey="Transportation" fill="#82ca9d" />
+          {/* <Bar dataKey="subscriptions" fill="#8884d8" />
           <Bar dataKey="household" fill="#82ca9d" />
           <Bar dataKey="subscriptions" fill="#8884d8" />
-          <Bar dataKey="household" fill="#82ca9d" />
-          <Bar dataKey="subscriptions" fill="#8884d8" />
-          <Bar dataKey="household" fill="#82ca9d" />
+          <Bar dataKey="household" fill="#82ca9d" /> */}
         </BarChart>
       </ResponsiveContainer>
     </div>
