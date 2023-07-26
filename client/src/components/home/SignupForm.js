@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-// import { AuthContext } from "../context/AuthContext";
-
 import { setRequestOptions } from "../../utils/utils";
 
 import "./styles/signupForm.css";
@@ -61,7 +59,6 @@ const SignupForm = () => {
         // setUser(user);
         localStorage.setItem("user", JSON.stringify(user));
       }
-      // setToken(responseData.token);
       localStorage.setItem("token", responseData.token);
       navigate("/dashboard");
 

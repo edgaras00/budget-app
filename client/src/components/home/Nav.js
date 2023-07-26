@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../../context/themeContext";
 
 import logo from "../../images/nblogo.svg";
@@ -8,9 +8,15 @@ import logoDark from "../../images/nblogo-dark.svg";
 import "./styles/nav.css";
 
 const Nav = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { theme, toggleTheme, setToken } = useContext(ThemeContext);
+  const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   return (
     <nav className={`navbar ${theme === "dark" ? "nav-dark" : null}`}>
@@ -43,7 +49,7 @@ const Nav = () => {
               theme === "dark" ? "button-container-dark" : null
             }`}
           >
-            <button>Log Out</button>
+            <button onClick={logOut}>Log Out</button>
           </div>
         </div>
       ) : (

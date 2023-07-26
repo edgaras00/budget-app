@@ -1,6 +1,10 @@
-.container {
+.analytics-container {
   background-color: #ffffff;
   height: 400px;
   width: 76%;
   border-radius: 15px;
+}
+
+.analytics-container-dark {
+  background-color: #333333;
 }

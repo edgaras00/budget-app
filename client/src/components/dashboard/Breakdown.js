@@ -1,22 +1,8 @@
 import { useState, useEffect } from "react";
 import { Pie, Cell, Legend, Tooltip, PieChart } from "recharts";
 
-// import styles from "./breakdown.module.css";
+import "./styles/breakdown.css";
 
-const data = [
-  {
-    name: "Category A",
-    value: 200,
-  },
-  {
-    name: "Category B",
-    value: 300,
-  },
-  {
-    name: "Category C",
-    value: 100,
-  },
-];
 const colors = ["#8884d8", "#82ca9d", "#ffc658"];
 
 const Breakdown = () => {
@@ -51,7 +37,7 @@ const Breakdown = () => {
     fetchSpendingBreakdown();
   }, []);
 
-  return (
+  return spendingBreakdown.length > 0 ? (
     <div className="breakdown-container">
       <div className="breakdown-heading">
         <h2>Spending breakdown</h2>
@@ -69,7 +55,7 @@ const Breakdown = () => {
               fill="#8884d8"
               label
             >
-              {data.map((entry, index) => (
+              {spendingBreakdown.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={colors[index % colors.length]}
@@ -82,7 +68,7 @@ const Breakdown = () => {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default Breakdown;
