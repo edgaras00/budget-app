@@ -33,17 +33,25 @@ exports.getUserTransactions = catchAsync(async (req, res) => {
 
   const filter = { userId: req.user.id };
 
-  console.log(sort, order);
-
   let sortBy = ["date", "DESC"];
 
   if (sort !== undefined) {
     if (order !== undefined) {
       sortBy = [sort, order.toUpperCase()];
+
+      if (sort === "category") {
+        sortBy = [{ model: Category }, "name", order];
+      }
+
+      if (sort === "account") {
+        sortBy = [{ model: Account }, "name", order];
+      }
     } else {
       sortBy = [sort, "DESC"];
     }
   }
+
+  console.log(sortBy);
 
   if (amountMin !== undefined) {
     filter.amount = { [Op.gte]: amountMin };

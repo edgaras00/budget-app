@@ -21,6 +21,9 @@ const Dashboard = () => {
 
   const [amountSort, setAmountSort] = useState("DESC");
   const [dateSort, setDateSort] = useState("ASC");
+  const [categorySort, setCategorySort] = useState("ASC");
+  const [accountSort, setAccountSort] = useState("ASC");
+
   const [formSubmitted, setFormSubmitted] = useState(0);
 
   const rerenderAfterSubmit = () => setFormSubmitted((submit) => submit + 1);
@@ -35,7 +38,7 @@ const Dashboard = () => {
         }
       );
       const responseData = await response.json();
-      setTransactions([...responseData.data.transactions]); // Update the state with sorted data
+      setTransactions([...responseData.data.transactions]);
     } catch (error) {
       console.log(error);
     }
@@ -44,13 +47,27 @@ const Dashboard = () => {
   const toggleAmountSort = () => {
     const newAmountSort = amountSort === "ASC" ? "DESC" : "ASC";
     setAmountSort(newAmountSort);
-    sortData("amount", newAmountSort); // Fetch and update the state with the updated sorting order
+    sortData("amount", newAmountSort);
   };
 
   const toggleDateSort = () => {
     const newDateSort = dateSort === "ASC" ? "DESC" : "ASC";
     setDateSort(newDateSort);
-    sortData("date", newDateSort); // Fetch and update the state with the updated sorting order
+    sortData("date", newDateSort);
+  };
+
+  console.log(transactions);
+
+  const toggleCategorySort = () => {
+    const newCategorySort = categorySort === "ASC" ? "DESC" : "ASC";
+    setCategorySort(newCategorySort);
+    sortData("category", newCategorySort);
+  };
+
+  const toggleAccountSort = () => {
+    const newAccountSort = accountSort === "ASC" ? "DESC" : "ASC";
+    setAccountSort(newAccountSort);
+    sortData("account", newAccountSort);
   };
 
   useEffect(() => {
@@ -138,11 +155,10 @@ const Dashboard = () => {
         transactions={transactions}
         setTransactions={setTransactions}
         rerenderAfterSubmit={rerenderAfterSubmit}
-        // sortData={sortData}
-        // amountSort={amountSort}
-        // dateSort={dateSort}
         toggleAmountSort={toggleAmountSort}
         toggleDateSort={toggleDateSort}
+        toggleCategorySort={toggleCategorySort}
+        toggleAccountSort={toggleAccountSort}
       />
       <Breakdown spendingBreakdown={spendingBreakdown} />
       <Analytics monthlySpending={monthlySpending} categories={categories} />

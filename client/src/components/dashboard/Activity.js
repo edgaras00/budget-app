@@ -17,11 +17,10 @@ const Activity = ({
   transactions,
   setTransactions,
   rerenderAfterSubmit,
-  sortData,
   toggleAmountSort,
   toggleDateSort,
-  amountSort,
-  dateSort,
+  toggleAccountSort,
+  toggleCategorySort,
 }) => {
   const { theme } = useContext(ThemeContext);
 
@@ -70,7 +69,7 @@ const Activity = ({
               width={28}
               height={28}
             />
-            <div>Apply filter</div>
+            <div>Apply Filter</div>
           </div>
           <img
             src={theme === "dark" ? newTxnImageDark : newTxnImage}
@@ -96,8 +95,12 @@ const Activity = ({
               <th onClick={toggleAmountSort} className="table-header">
                 Amount
               </th>
-              <th>Category</th>
-              <th>Account</th>
+              <th onClick={toggleCategorySort} className="table-header">
+                Category
+              </th>
+              <th onClick={toggleAccountSort} className="table-header">
+                Account
+              </th>
               <th></th>
             </tr>
           </thead>

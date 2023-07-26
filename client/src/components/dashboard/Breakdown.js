@@ -1,17 +1,23 @@
-// import { useState, useEffect } from "react";
+import { useContext } from "react";
 import { Pie, Cell, Legend, Tooltip, PieChart } from "recharts";
+
+import { ThemeContext, ThemeContextProvider } from "../../context/themeContext";
 
 import { colors } from "../../utils/categoryColors";
 
 import "./styles/breakdown.css";
 
-// const colors = ["#8884d8", "#82ca9d", "#ffc658"];
-
 const Breakdown = ({ spendingBreakdown }) => {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <div className="breakdown-container">
-      <div className="breakdown-heading">
-        <h2>Spending breakdown</h2>
+      <div
+        className={`breakdown-heading ${
+          theme === "dark" ? "breakdown-heading-dark" : null
+        }`}
+      >
+        <h2>Spending Breakdown</h2>
       </div>
       <div className="breakdown-bottom">
         <div className="breakdown-chart">
