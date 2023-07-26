@@ -15,6 +15,10 @@
   color: #000000;
 }
 
+.signup-form-dark a {
+  color: #fc4fa5;
+}
+
 .signup-form input {
   width: 50%;
   height: 40px;
@@ -40,9 +44,8 @@
   opacity: 0.8;
 }
 
-.singup-account {
-  width: 50%;
-  margin-top: 0.8rem;
+.signup-form-dark button[type="submit"] {
+  background-color: #686868;
 }
 
 .signup-link {

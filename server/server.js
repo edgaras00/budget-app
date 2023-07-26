@@ -18,8 +18,11 @@ Account.belongsTo(User);
 User.hasMany(Transaction);
 Transaction.belongsTo(User);
 
-Account.hasMany(Transaction);
-Transaction.belongsTo(Account);
+Account.hasMany(Transaction, { foreignKey: "accountId" });
+Transaction.belongsTo(Account, {
+  foreignKey: "accountId",
+  onDelete: "CASCADE",
+});
 
 Category.hasMany(Transaction, { foreignKey: "categoryId" });
 Transaction.belongsTo(Category, { foreignKey: "categoryId" });
@@ -29,7 +32,7 @@ Budget.belongsTo(Category, { foreignKey: "categoryId" });
 
 const startServer = async () => {
   try {
-    await sequelize.sync({ alter: true });
+    await sequelize.sync({ force: true });
     console.log("Database is synchronized");
 
     const PORT = process.env.PORT || 5000;

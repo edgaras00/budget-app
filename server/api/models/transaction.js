@@ -17,6 +17,10 @@ const Transaction = sequelize.define("transaction", {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
   },
+  accountId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
 });
 
 module.exports = Transaction;

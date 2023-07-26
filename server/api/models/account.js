@@ -6,7 +6,7 @@ const Account = sequelize.define("account", {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
-      len: [3, 30],
+      len: [1, 30],
     },
   },
   accountType: {

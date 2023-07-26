@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
+import { ThemeContext } from "../../context/themeContext";
 
 import { setRequestOptions } from "../../utils/utils";
 
@@ -9,6 +12,8 @@ import "./styles/signupForm.css";
 
 const SignupForm = () => {
   const navigate = useNavigate();
+
+  const { theme } = useContext(ThemeContext);
 
   const schema = yup.object().shape({
     name: yup
@@ -70,7 +75,12 @@ const SignupForm = () => {
 
   return (
     <div className="signup-container">
-      <form onSubmit={handleSubmit(onSubmit)} className="signup-form">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={`signup-form ${
+          theme === "dark" ? "signup-form-dark" : null
+        }`}
+      >
         <input {...register("name")} type="text" required placeholder="Name" />
         <input
           {...register("email")}

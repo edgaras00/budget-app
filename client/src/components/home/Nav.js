@@ -36,27 +36,27 @@ const Nav = () => {
           </div>
         </Link>
       </div>
-      {token ? (
-        <div className={`user-nav`}>
-          <div
-            className={`theme ${theme === "dark" ? "theme-dark" : null}`}
-            onClick={toggleTheme}
-          >
-            {theme === "light" ? "Dark" : "Light"}
-          </div>
-          <div
-            className={`button-container user-button ${
-              theme === "dark" ? "button-container-dark" : null
-            }`}
-          >
+      <div className={`user-nav`}>
+        <div
+          className={`theme ${theme === "dark" ? "theme-dark" : null}`}
+          onClick={toggleTheme}
+        >
+          {theme === "light" ? "Dark" : "Light"}
+        </div>
+        <div
+          className={`button-container user-button ${
+            theme === "dark" ? "button-container-dark" : null
+          }`}
+        >
+          {token ? (
             <button onClick={logOut}>Log Out</button>
-          </div>
+          ) : (
+            <Link to="/login">
+              <button>Log In</button>
+            </Link>
+          )}
         </div>
-      ) : (
-        <div className="button-container">
-          <button>Log In</button>
-        </div>
-      )}
+      </div>
     </nav>
   );
 };

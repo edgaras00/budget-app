@@ -24,13 +24,30 @@
   animation: colorChangeTrack 4s;
 }
 
+.heading-track-dark {
+  color: #fff;
+  animation: colorChangeTrackDark 4s;
+}
+
 .heading-plan {
   animation: colorChangePlan 4s;
   animation-delay: 5s;
 }
 
+.heading-plan-dark {
+  color: #fff;
+  animation: colorChangePlanDark 4s;
+  animation-delay: 5s;
+}
+
 .heading-succeed {
   animation: colorChangeSucceed 4s forwards;
+  animation-delay: 8.5s;
+}
+
+.heading-succeed-dark {
+  color: #fff;
+  animation: colorChangeSucceedDark 4s forwards;
   animation-delay: 8.5s;
 }
 
@@ -42,6 +59,10 @@
 .home-description p {
   font-size: 1.5rem;
   color: #666666;
+}
+
+.home-description-dark p {
+  color: #8b8b8b;
 }
 
 .home-start {
@@ -58,14 +79,31 @@
   cursor: pointer;
 }
 
+.home-start-dark button {
+  background-color: #333333;
+}
+
 .home-start button:hover {
-  background-color: #3f3f3f;
+  opacity: 0.8;
 }
 
 @keyframes colorChangeTrack {
   0%,
   100% {
     color: #000000;
+  }
+  60%,
+  100% {
+    background: linear-gradient(90deg, #007cf0, #00dfd8);
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@keyframes colorChangeTrackDark {
+  0%,
+  100% {
+    color: #fff;
   }
   60%,
   100% {
@@ -88,9 +126,40 @@
   }
 }
 
+@keyframes colorChangePlanDark {
+  0%,
+  100% {
+    color: #fff;
+  }
+  60%,
+  100% {
+    background: linear-gradient(90deg, #7928ca, #ff0080);
+    background-clip: text;
+    color: transparent;
+  }
+}
+
 @keyframes colorChangeSucceed {
   0% {
     color: #000000;
+  }
+  50%,
+  80% {
+    background: linear-gradient(90deg, #ff4d4d, #f9cb28);
+    background-clip: text;
+    color: transparent;
+  }
+
+  100% {
+    background: linear-gradient(90deg, #ff4d4d, #f9cb28);
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@keyframes colorChangeSucceedDark {
+  0% {
+    color: #fff;
   }
   50%,
   80% {
