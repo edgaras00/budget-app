@@ -32,7 +32,7 @@ Budget.belongsTo(Category, { foreignKey: "categoryId" });
 
 const startServer = async () => {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ alter: true });
     console.log("Database is synchronized");
 
     const PORT = process.env.PORT || 5000;

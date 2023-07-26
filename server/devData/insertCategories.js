@@ -26,6 +26,13 @@ const insertCategories = async () => {
       { name: "misc" },
       { name: "food" },
       { name: "clothing" },
+      { name: "entertainment" },
+      { name: "travel" },
+      { name: "pets" },
+      { name: "childcare" },
+      { name: "hygiene" },
+      { name: "technology" },
+      { name: "sports" },
     ];
     const createdCategories = await Category.bulkCreate(categories);
     console.log(createdCategories);
