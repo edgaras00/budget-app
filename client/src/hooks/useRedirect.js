@@ -8,7 +8,7 @@ const useAuth = () => {
     if (token) {
       navigate("/dashboard");
     }
-  }, []);
+  }, [token, navigate]);
   return;
 };
 

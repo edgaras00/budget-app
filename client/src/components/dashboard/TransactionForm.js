@@ -111,7 +111,7 @@ const TransactionForm = ({
         : "http://localhost:5000/api/transactions";
       const response = await fetch(url, requestOptions);
       const responseData = await response.json();
-
+      console.log(responseData);
       rerenderAfterSubmit();
       handleClose();
     } catch (error) {

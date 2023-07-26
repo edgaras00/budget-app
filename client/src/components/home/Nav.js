@@ -8,7 +8,7 @@ import logoDark from "../../images/nblogo-dark.svg";
 import "./styles/nav.css";
 
 const Nav = () => {
-  const { theme, toggleTheme, setToken } = useContext(ThemeContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");

@@ -85,6 +85,10 @@
   padding-bottom: 2rem;
 }
 
+.table-header {
+  cursor: pointer;
+}
+
 .remove-th {
   color: transparent;
 }

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { ThemeContext } from "../../context/themeContext";
 
 import Activity from "./Activity";
@@ -14,6 +14,116 @@ const Dashboard = () => {
   useAuth();
 
   const { theme } = useContext(ThemeContext);
+  const [transactions, setTransactions] = useState([]);
+  const [spendingBreakdown, setSpendingBreakdown] = useState([]);
+  const [monthlySpending, setMonthlySpending] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  const [amountSort, setAmountSort] = useState("DESC");
+  const [dateSort, setDateSort] = useState("ASC");
+  const [formSubmitted, setFormSubmitted] = useState(0);
+
+  const rerenderAfterSubmit = () => setFormSubmitted((submit) => submit + 1);
+
+  const sortData = async (col, order) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `http://localhost:5000/api/transactions/user?sort=${col}&order=${order}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const responseData = await response.json();
+      setTransactions([...responseData.data.transactions]); // Update the state with sorted data
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const toggleAmountSort = () => {
+    const newAmountSort = amountSort === "ASC" ? "DESC" : "ASC";
+    setAmountSort(newAmountSort);
+    sortData("amount", newAmountSort); // Fetch and update the state with the updated sorting order
+  };
+
+  const toggleDateSort = () => {
+    const newDateSort = dateSort === "ASC" ? "DESC" : "ASC";
+    setDateSort(newDateSort);
+    sortData("date", newDateSort); // Fetch and update the state with the updated sorting order
+  };
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      const token = localStorage.getItem("token");
+
+      try {
+        if (!token) return;
+
+        const response = await fetch(
+          "http://localhost:5000/api/transactions/user",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        const responseData = await response.json();
+
+        setTransactions(responseData.data.transactions);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchTransactions();
+  }, [formSubmitted]);
+
+  useEffect(() => {
+    const fetchSpendingBreakdown = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await fetch(
+          "http://localhost:5000/api/transactions/breakdown",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const responseData = await response.json();
+
+        const spendingBreakdown = responseData.data.spendingBreakdown.map(
+          (dataPoint) => {
+            dataPoint.totalAmount = Number(dataPoint.totalAmount);
+            return dataPoint;
+          }
+        );
+
+        setSpendingBreakdown(spendingBreakdown);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchSpendingBreakdown();
+  }, [transactions]);
+
+  useEffect(() => {
+    const fetchMonthlySpending = async () => {
+      const token = localStorage.getItem("token");
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/transactions/monthly",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        const responseData = await response.json();
+        setMonthlySpending(responseData.data.monthlyTransactions);
+        setCategories(responseData.data.categories);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchMonthlySpending();
+  }, [transactions]);
 
   return (
     <div
@@ -24,9 +134,18 @@ const Dashboard = () => {
       <div className="goals-btn-container">
         <GoalsButton text="Manage Accounts" type={2} link="/accounts" />
       </div>
-      <Activity />
-      <Breakdown />
-      <Analytics />
+      <Activity
+        transactions={transactions}
+        setTransactions={setTransactions}
+        rerenderAfterSubmit={rerenderAfterSubmit}
+        // sortData={sortData}
+        // amountSort={amountSort}
+        // dateSort={dateSort}
+        toggleAmountSort={toggleAmountSort}
+        toggleDateSort={toggleDateSort}
+      />
+      <Breakdown spendingBreakdown={spendingBreakdown} />
+      <Analytics monthlySpending={monthlySpending} categories={categories} />
     </div>
   );
 };

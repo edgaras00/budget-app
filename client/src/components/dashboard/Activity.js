@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import Transaction from "./Transaction";
 import CustomModal from "./CustomModal";
 import TransactionForm from "./TransactionForm";
@@ -13,11 +13,17 @@ import newTxnImageDark from "../../images/add-dark.svg";
 
 import "./styles/activity.css";
 
-const Activity = () => {
+const Activity = ({
+  transactions,
+  setTransactions,
+  rerenderAfterSubmit,
+  sortData,
+  toggleAmountSort,
+  toggleDateSort,
+  amountSort,
+  dateSort,
+}) => {
   const { theme } = useContext(ThemeContext);
-
-  const [transactions, setTransactions] = useState([]);
-  const [formSubmitted, setFormSubmitted] = useState(0);
 
   const [filterOpen, setFilterOpen] = useState(false);
   const handleFilterOpen = () => setFilterOpen(true);
@@ -26,31 +32,6 @@ const Activity = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const rerenderAfterSubmit = () => setFormSubmitted((submit) => submit + 1);
-
-  useEffect(() => {
-    const fetchTransactions = async () => {
-      const token = localStorage.getItem("token");
-
-      try {
-        if (!token) return;
-
-        const response = await fetch(
-          "http://localhost:5000/api/transactions/user",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-        const responseData = await response.json();
-
-        setTransactions(responseData.data.transactions);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchTransactions();
-  }, [formSubmitted]);
 
   const transactionComponents = transactions.map((transaction) => {
     return (
@@ -109,8 +90,12 @@ const Activity = () => {
         <table className="transaction-table">
           <thead>
             <tr>
-              <th>Transaction</th>
-              <th>Amount</th>
+              <th onClick={toggleDateSort} className="table-header">
+                Transaction
+              </th>
+              <th onClick={toggleAmountSort} className="table-header">
+                Amount
+              </th>
               <th>Category</th>
               <th>Account</th>
               <th></th>

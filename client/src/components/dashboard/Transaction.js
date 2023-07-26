@@ -6,19 +6,10 @@ import TransactionForm from "./TransactionForm";
 
 import { ThemeContext } from "../../context/themeContext";
 
+// import clothing from "../../images/clothing.svg";
 import defaultImage from "../../images/default.svg";
 
 import "./styles/transaction.css";
-
-const dummyData = {
-  amount: 1000000000,
-  category: "clothing",
-  paymentType: "Debit",
-  account: "Chase",
-  date: dayjs().format("DD MMM YYYY"),
-  description: "Spotify",
-  logo: "https://logo.clearbit.com/starbucks.com",
-};
 
 const centsToDollars = (amountCents) => {
   return amountCents / 100;

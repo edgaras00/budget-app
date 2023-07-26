@@ -27,11 +27,23 @@ exports.getUserTransactions = catchAsync(async (req, res) => {
     amountMax,
     accountOptions,
     categoryOptions,
-    startDate,
-    endDate,
+    sort,
+    order,
   } = req.query;
 
   const filter = { userId: req.user.id };
+
+  console.log(sort, order);
+
+  let sortBy = ["date", "DESC"];
+
+  if (sort !== undefined) {
+    if (order !== undefined) {
+      sortBy = [sort, order.toUpperCase()];
+    } else {
+      sortBy = [sort, "DESC"];
+    }
+  }
 
   if (amountMin !== undefined) {
     filter.amount = { [Op.gte]: amountMin };
@@ -64,6 +76,7 @@ exports.getUserTransactions = catchAsync(async (req, res) => {
     attributes: {
       exclude: ["createdAt", "updatedAt"],
     },
+    order: [sortBy],
   });
 
   res.status(200).json({

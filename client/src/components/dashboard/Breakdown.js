@@ -1,43 +1,14 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import { Pie, Cell, Legend, Tooltip, PieChart } from "recharts";
+
+import { colors } from "../../utils/categoryColors";
 
 import "./styles/breakdown.css";
 
-const colors = ["#8884d8", "#82ca9d", "#ffc658"];
+// const colors = ["#8884d8", "#82ca9d", "#ffc658"];
 
-const Breakdown = () => {
-  const [spendingBreakdown, setSpendingBreakdown] = useState([]);
-
-  useEffect(() => {
-    const fetchSpendingBreakdown = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(
-          "http://localhost:5000/api/transactions/breakdown",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const responseData = await response.json();
-
-        const spendingBreakdown = responseData.data.spendingBreakdown.map(
-          (dataPoint) => {
-            dataPoint.totalAmount = Number(dataPoint.totalAmount);
-            return dataPoint;
-          }
-        );
-
-        setSpendingBreakdown(spendingBreakdown);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchSpendingBreakdown();
-  }, []);
-
-  return spendingBreakdown.length > 0 ? (
+const Breakdown = ({ spendingBreakdown }) => {
+  return (
     <div className="breakdown-container">
       <div className="breakdown-heading">
         <h2>Spending breakdown</h2>
@@ -56,10 +27,7 @@ const Breakdown = () => {
               label
             >
               {spendingBreakdown.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={colors[index % colors.length]}
-                />
+                <Cell key={`cell-${index}`} fill={colors[entry.categoryName]} />
               ))}
             </Pie>
             <Tooltip />
@@ -68,7 +36,7 @@ const Breakdown = () => {
         </div>
       </div>
     </div>
-  ) : null;
+  );
 };
 
 export default Breakdown;

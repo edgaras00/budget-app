@@ -1,9 +1,9 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 
 import {
   BarChart,
   Bar,
-  Cell,
+  // Cell,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -17,30 +17,8 @@ import { ThemeContext } from "../../context/themeContext";
 import { colors } from "../../utils/categoryColors";
 import "./styles/analytics.css";
 
-const Analytics = () => {
+const Analytics = ({ monthlySpending, categories }) => {
   const { theme } = useContext(ThemeContext);
-  const [monthlySpending, setMonthlySpending] = useState([]);
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    const fetchMonthlySpending = async () => {
-      const token = localStorage.getItem("token");
-      try {
-        const response = await fetch(
-          "http://localhost:5000/api/transactions/monthly",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-        const responseData = await response.json();
-        setMonthlySpending(responseData.data.monthlyTransactions);
-        setCategories(responseData.data.categories);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchMonthlySpending();
-  }, []);
 
   const bars = categories.map((category) => (
     <Bar
@@ -74,10 +52,6 @@ const Analytics = () => {
           <Tooltip />
           <Legend />
           {bars}
-          {/* <Bar dataKey="Food" fill="#82ca9d" />
-          <Bar dataKey="Groceries" fill="#8884d8" />
-          <Bar dataKey="Household" fill="#82ca9d" />
-          <Bar dataKey="Subscriptions" fill="#2C2CCA" /> */}
         </BarChart>
       </ResponsiveContainer>
     </div>
