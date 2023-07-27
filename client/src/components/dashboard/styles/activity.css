@@ -134,7 +134,8 @@
   }
 
   .select-option {
-    width: 84px;
+    width: 80px;
+    padding: 1rem 0.4rem;
   }
   .select-option div {
     display: none;
@@ -148,5 +149,10 @@
 
   .transaction-table th {
     font-size: 0.9rem;
+  }
+
+  .select-option {
+    width: 75px;
+    padding: 0.9rem 0.3rem;
   }
 }
