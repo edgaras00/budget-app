@@ -19,7 +19,7 @@ const SignupForm = () => {
     name: yup
       .string()
       .required("Please enter your name")
-      .max(30, "Cannot exceed more than 30 characters."),
+      .max(30, "Name cannot exceed more than 30 characters."),
     email: yup
       .string()
       .required("Please enter your email")
@@ -35,42 +35,48 @@ const SignupForm = () => {
       .oneOf([yup.ref("password")], "Passwords must match"),
   });
 
-  const { register, handleSubmit, reset } = useForm({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = async (data) => {
-    try {
-      const requestOptions = setRequestOptions(
-        "POST",
-        {
-          name: data.name,
-          email: data.email,
-          password: data.password,
-        },
-        null
-      );
-      console.log(requestOptions);
-      const response = await fetch(
-        "http://localhost:5000/api/user/signup",
-        requestOptions
-      );
-      const responseData = await response.json();
+    console.log(data);
+    // try {
+    //   const requestOptions = setRequestOptions(
+    //     "POST",
+    //     {
+    //       name: data.name,
+    //       email: data.email,
+    //       password: data.password,
+    //     },
+    //     null
+    //   );
+    //   console.log(requestOptions);
+    //   const response = await fetch(
+    //     "http://localhost:5000/api/user/signup",
+    //     requestOptions
+    //   );
+    //   const responseData = await response.json();
 
-      console.log(responseData);
+    //   console.log(responseData);
 
-      if ("user" in responseData.data) {
-        const user = responseData.data.user;
-        // setUser(user);
-        localStorage.setItem("user", JSON.stringify(user));
-      }
-      localStorage.setItem("token", responseData.token);
-      navigate("/dashboard");
+    //   if ("user" in responseData.data) {
+    //     const user = responseData.data.user;
+    //     // setUser(user);
+    //     localStorage.setItem("user", JSON.stringify(user));
+    //   }
+    //   localStorage.setItem("token", responseData.token);
+    //   navigate("/dashboard");
 
-      reset();
-    } catch (error) {
-      console.log(error);
-    }
+    //   reset();
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
@@ -100,6 +106,16 @@ const SignupForm = () => {
           required
           placeholder="Confirm Password"
         />
+        <div
+          className={`form-errors ${
+            theme === "dark" ? "form-errors-dark" : null
+          }`}
+        >
+          {errors.name && <p>{errors.name.message}</p>}
+          {errors.email && <p>{errors.email.message}</p>}
+          {errors.password && <p>{errors.password.message}</p>}
+          {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+        </div>
         <button type="submit">Sign up</button>
         <p className="signup-account">
           Already have an account?{" "}

@@ -27,7 +27,12 @@ const LoginForm = () => {
       .max(30, "Password cannot be more than 30 characters"),
   });
 
-  const { register, handleSubmit, reset } = useForm({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
   });
 
@@ -77,6 +82,14 @@ const LoginForm = () => {
           required
           placeholder="Password"
         />
+        <div
+          className={`form-errors ${
+            theme === "dark" ? "form-errors-dark" : null
+          }`}
+        >
+          {errors.email && <p>{errors.email.message}</p>}
+          {errors.password && <p>{errors.password.message}</p>}
+        </div>
         <button type="submit">Log in</button>
         <p className="signup-account">
           Don't have an account?{" "}

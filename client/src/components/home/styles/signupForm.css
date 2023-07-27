@@ -56,6 +56,15 @@
   opacity: 0.7;
 }
 
+.form-errors {
+  font-weight: 500;
+  color: #fc390e;
+}
+
+.form-errors-dark {
+  color: #ff4444;
+}
+
 @media (max-width: 882px) {
   .signup-container {
     width: 70%;
