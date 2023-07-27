@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Pie, Cell, Legend, Tooltip, PieChart } from "recharts";
 
-import { ThemeContext, ThemeContextProvider } from "../../context/themeContext";
+import { ThemeContext } from "../../context/themeContext";
 
 import { colors } from "../../utils/categoryColors";
 

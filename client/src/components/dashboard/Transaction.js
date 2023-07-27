@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import dayjs from "dayjs";
 
 import CustomModal from "./CustomModal";
@@ -28,6 +28,7 @@ import hygieneImage from "../../images/hygiene.svg";
 import childcareImage from "../../images/childcare.svg";
 import petsImage from "../../images/pets.svg";
 import technologyImage from "../../images/technology.svg";
+import sportsImage from "../../images/sports.svg";
 import miscImage from "../../images/default.svg";
 
 import "./styles/transaction.css";
@@ -108,6 +109,9 @@ const Transaction = ({
       break;
     case "hygiene":
       defaultImg = hygieneImage;
+      break;
+    case "sports":
+      defaultImg = sportsImage;
       break;
     default:
       defaultImg = miscImage;

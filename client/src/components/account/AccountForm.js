@@ -31,7 +31,12 @@ const AccountForm = ({
     balance: yup.number().required("Please enter your balance"),
   });
 
-  const { register, handleSubmit, reset } = useForm({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       name: modify ? name : "",
@@ -87,6 +92,15 @@ const AccountForm = ({
         <div className="input-wrapper">
           <label>Balance</label>
           <input {...register("balance")} type="number" />
+        </div>
+        <div
+          className={`form-errors ${
+            theme === "dark" ? "form-errors-dark" : null
+          }`}
+        >
+          {errors.name && <p>{errors.name.message}</p>}
+          {errors.accountType && <p>{errors.accountType.message}</p>}
+          {errors.balance && <p>{errors.balance.message}</p>}
         </div>
         <button type="submit">{modify ? "Save" : "Add"} Account</button>
       </form>

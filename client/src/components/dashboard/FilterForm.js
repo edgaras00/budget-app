@@ -10,7 +10,11 @@ import { fetchAccountCategoryData } from "../../utils/utils";
 import "./styles/transactionForm.css";
 import "./styles/filterForm.css";
 
-const FilterForm = ({ handleClose, setTransactions }) => {
+const FilterForm = ({
+  handleClose,
+  setTransactions,
+  transactionCategories,
+}) => {
   const { theme } = useContext(ThemeContext);
   const [categories, setCategories] = useState([]);
   const [accounts, setAccounts] = useState([]);
@@ -52,7 +56,12 @@ const FilterForm = ({ handleClose, setTransactions }) => {
     accountOptions: yup.array().of(yup.string()),
   });
 
-  const { register, handleSubmit, control } = useForm({
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
   });
 
@@ -94,7 +103,7 @@ const FilterForm = ({ handleClose, setTransactions }) => {
   };
 
   const accountOptions = accounts.map((account) => (
-    <div key={account.id} className="checkbox">
+    <div key={account.id} className="checkbox account-check">
       <label>
         {account.name} ({account.accountType})
       </label>
@@ -125,7 +134,7 @@ const FilterForm = ({ handleClose, setTransactions }) => {
     </div>
   ));
 
-  const categoryOptions = categories.map((category) => (
+  const categoryOptions = transactionCategories.map((category) => (
     <div key={category.id} className="checkbox category-check">
       <label>{category.name}</label>
       <Controller
@@ -191,7 +200,16 @@ const FilterForm = ({ handleClose, setTransactions }) => {
           <div className="option-heading">Categories</div>
           <div className="category-options">{categoryOptions}</div>
         </div>
-
+        <div
+          className={`form-errors ${
+            theme === "dark" ? "form-errors-dark" : null
+          }`}
+        >
+          {errors.amountMin && <p>{errors.amountMin.message}</p>}
+          {errors.amountMax && <p>{errors.amountMax.message}</p>}
+          {errors.categoryOptions && <p>{errors.categoryOptions.message}</p>}
+          {errors.accountOptions && <p>{errors.accountOptions.message}</p>}
+        </div>
         <button type="submit">Save</button>
       </form>
     </div>

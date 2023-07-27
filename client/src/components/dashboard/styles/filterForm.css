@@ -18,8 +18,7 @@
 
 .category-options {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(1, 1fr);
 }
 
 .option-heading {
@@ -31,13 +30,19 @@
   display: flex;
 }
 
-.checkbox {
-  font-size: 0.8rem;
-}
-
-.category-check {
+.category-check,
+.account-check {
   display: flex;
   align-items: center;
+}
+
+.checkbox {
+  font-size: 0.9rem;
+}
+
+.category-check label,
+.account-check label {
+  width: 100px;
 }
 
 .checkbox input {

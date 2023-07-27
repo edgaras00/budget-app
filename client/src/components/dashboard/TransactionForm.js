@@ -69,7 +69,11 @@ const TransactionForm = ({
     account: yup.string().required("Please select transaction account / type"),
   });
 
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
       transactionName: modify ? name : "",
@@ -155,6 +159,17 @@ const TransactionForm = ({
             <option>-- Select --</option>
             {accountOptions}
           </select>
+        </div>
+        <div
+          className={`form-errors ${
+            theme === "dark" ? "form-errors-dark" : null
+          }`}
+        >
+          {errors.transactionName && <p>{errors.transactionName.message}</p>}
+          {errors.transactionDate && <p>{errors.transactionDate.message}</p>}
+          {errors.amount && <p>{errors.amount.message}</p>}
+          {errors.category && <p>{errors.category.message}</p>}
+          {errors.account && <p>{errors.account.message}</p>}
         </div>
         {accounts.length === 0 ? (
           <div>

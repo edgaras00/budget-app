@@ -45,38 +45,37 @@ const SignupForm = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
-    // try {
-    //   const requestOptions = setRequestOptions(
-    //     "POST",
-    //     {
-    //       name: data.name,
-    //       email: data.email,
-    //       password: data.password,
-    //     },
-    //     null
-    //   );
-    //   console.log(requestOptions);
-    //   const response = await fetch(
-    //     "http://localhost:5000/api/user/signup",
-    //     requestOptions
-    //   );
-    //   const responseData = await response.json();
+    try {
+      const requestOptions = setRequestOptions(
+        "POST",
+        {
+          name: data.name,
+          email: data.email,
+          password: data.password,
+        },
+        null
+      );
+      console.log(requestOptions);
+      const response = await fetch(
+        "http://localhost:5000/api/user/signup",
+        requestOptions
+      );
+      const responseData = await response.json();
 
-    //   console.log(responseData);
+      console.log(responseData);
 
-    //   if ("user" in responseData.data) {
-    //     const user = responseData.data.user;
-    //     // setUser(user);
-    //     localStorage.setItem("user", JSON.stringify(user));
-    //   }
-    //   localStorage.setItem("token", responseData.token);
-    //   navigate("/dashboard");
+      if ("user" in responseData.data) {
+        const user = responseData.data.user;
+        // setUser(user);
+        localStorage.setItem("user", JSON.stringify(user));
+      }
+      localStorage.setItem("token", responseData.token);
+      navigate("/dashboard");
 
-    //   reset();
-    // } catch (error) {
-    //   console.log(error);
-    // }
+      reset();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

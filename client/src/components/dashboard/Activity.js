@@ -32,6 +32,13 @@ const Activity = ({
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const transactionCategories = transactions.map((transaction) => ({
+    name: transaction.category.name,
+    id: transaction.categoryId,
+  }));
+
+  console.log(transactionCategories);
+
   const transactionComponents = transactions.map((transaction) => {
     return (
       <Transaction
@@ -126,6 +133,7 @@ const Activity = ({
             rerenderAfterSubmit={rerenderAfterSubmit}
             handleClose={handleFilterClose}
             setTransactions={setTransactions}
+            transactionCategories={transactionCategories}
           />
         }
       />

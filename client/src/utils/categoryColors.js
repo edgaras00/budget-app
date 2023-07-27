@@ -10,4 +10,11 @@ export const colors = {
   misc: "#808080",
   food: "#FF4500",
   clothing: "#800080",
+  technology: "#0BA3A3",
+  sports: "#49B800",
+  hygiene: "#DB7D9C",
+  childcare: "#65C3FD",
+  pets: "#DD10AA",
+  travel: "#FDB30D",
+  entertainment: "#FF3B3B",
 };
