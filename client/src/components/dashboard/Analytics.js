@@ -27,7 +27,7 @@ const Analytics = ({ monthlySpending, categories }) => {
     />
   ));
 
-  return monthlySpending.length > 0 ? (
+  return (
     <div
       className={`analytics-container ${
         theme === "dark" ? "analytics-container-dark" : null
@@ -54,7 +54,7 @@ const Analytics = ({ monthlySpending, categories }) => {
         </BarChart>
       </ResponsiveContainer>
     </div>
-  ) : null;
+  );
 };
 
 export default Analytics;

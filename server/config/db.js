@@ -1,9 +1,5 @@
 const { Sequelize } = require("sequelize");
 
-// const sequelize = new Sequelize(process.env.DB_CONNECT, {
-//   logging: console.log,
-// });
-
 const sequelize = new Sequelize(process.env.DB_CONN, {
   logging: console.log,
 });
@@ -13,7 +9,12 @@ const testDbConnection = async () => {
     await sequelize.authenticate();
     console.log("Connection has been established successfully.");
   } catch (error) {
-    console.error("Unable to connect to the database:", error);
+    if (error instanceof Sequelize.Error) {
+      console.log("Sequelize error:", error.message);
+      console.log("Original database error:", error.parent.message);
+    } else {
+      console.log("Error", error);
+    }
   }
 };
 

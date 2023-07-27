@@ -67,8 +67,8 @@
 }
 
 .subscriptions {
-  background-color: rgb(58, 58, 245, 0.15);
-  color: rgb(44, 44, 202);
+  background-color: rgb(96, 96, 250, 0.15);
+  color: rgb(96, 96, 250);
 }
 
 .groceries {
@@ -167,19 +167,34 @@
 }
 
 @media (max-width: 500px) {
+  .transaction-name {
+    width: 100px;
+  }
+
   .name-text,
   .transaction-date {
     font-size: 0.85rem;
   }
 
   .transaction-amount,
-  .payment-type,
-  .transaction-account {
+  .payment-type {
     font-size: 0.85rem;
+  }
+
+  .txn-account-name {
+    font-size: 0.8rem;
+  }
+
+  .txn-account-type {
+    font-size: 0.75rem;
   }
 
   .category {
     font-size: 0.82rem;
     padding: 6px 0px;
+  }
+
+  .edit-txn {
+    font-size: 0.8rem;
   }
 }

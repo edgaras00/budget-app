@@ -51,14 +51,15 @@ exports.getUserTransactions = catchAsync(async (req, res) => {
     }
   }
 
-  console.log(sortBy);
-
-  if (amountMin !== undefined) {
+  if (amountMin !== undefined && amountMax !== undefined) {
+    filter.amount = {
+      [Op.gte]: amountMin,
+      [Op.lte]: amountMax,
+    };
+  } else if (amountMin !== undefined) {
     filter.amount = { [Op.gte]: amountMin };
-  }
-
-  if (amountMax !== undefined) {
-    filter.amount = { ...filterAmount, [Op.lte]: amountMax };
+  } else if (amountMax !== undefined) {
+    filter.amount = { [Op.lte]: amountMax };
   }
 
   // if (startDate !== undefined && endDate !== undefined) {

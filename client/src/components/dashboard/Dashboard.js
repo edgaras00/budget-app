@@ -160,8 +160,15 @@ const Dashboard = () => {
         toggleCategorySort={toggleCategorySort}
         toggleAccountSort={toggleAccountSort}
       />
-      <Breakdown spendingBreakdown={spendingBreakdown} />
-      <Analytics monthlySpending={monthlySpending} categories={categories} />
+      {transactions.length > 0 ? (
+        <>
+          <Breakdown spendingBreakdown={spendingBreakdown} />
+          <Analytics
+            monthlySpending={monthlySpending}
+            categories={categories}
+          />
+        </>
+      ) : null}
     </div>
   );
 };

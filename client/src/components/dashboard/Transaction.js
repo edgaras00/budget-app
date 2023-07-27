@@ -33,9 +33,9 @@ import miscImage from "../../images/default.svg";
 
 import "./styles/transaction.css";
 
-const centsToDollars = (amountCents) => {
-  return amountCents / 100;
-};
+// const centsToDollars = (amountCents) => {
+//   return amountCents / 100;
+// };
 
 const Transaction = ({
   name,
@@ -158,7 +158,7 @@ const Transaction = ({
           </div>
         </div>
       </td>
-      <td className="transaction-amount">${centsToDollars(amount)}</td>
+      <td className="transaction-amount">{amount}</td>
       <td>
         <div className={`category ${category.toLowerCase()}`}>{category}</div>
       </td>
