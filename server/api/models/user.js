@@ -25,6 +25,13 @@ const User = sequelize.define("user", {
       len: [6, 20],
     },
   },
+  role: {
+    type: DataTypes.STRING,
+    defaultValue: "user",
+    validate: {
+      isIn: [["admin", "user"]],
+    },
+  },
 });
 
 User.defaultScope = {

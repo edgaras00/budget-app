@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const catchAsync = require("../../utils/catchAsync");
 
 const User = require("../models/user");
+const AppError = require("../../utils/AppError");
 
 const signToken = (id) => {
   const token = jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -50,11 +51,11 @@ exports.signup = catchAsync(async (req, res) => {
   createAndSendToken(user, 201, res);
 });
 
-exports.login = catchAsync(async (req, res) => {
+exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(404);
+    return next(new AppError("Please provide email and password", 401));
   }
 
   const user = await User.unscoped().findOne({
@@ -62,14 +63,8 @@ exports.login = catchAsync(async (req, res) => {
     attributes: { exclude: ["createdAt", "updatedAt"] },
   });
 
-  if (!user) {
-    return res.status(404);
-  }
-
-  const isPasswordCorrect = await bcrypt.compare(password, user.password);
-
-  if (!isPasswordCorrect) {
-    return res.status(400);
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    return next(new AppError("Incorrect email or password", 401));
   }
 
   user.password = undefined;
@@ -99,7 +94,7 @@ exports.protectRoute = catchAsync(async (req, res, next) => {
   }
   // Check if received token
   if (!token) {
-    return;
+    return next(new AppError("Please log in to gain access", 401));
   }
 
   // Verify token
@@ -109,9 +104,22 @@ exports.protectRoute = catchAsync(async (req, res, next) => {
   const user = await User.findByPk(decoded.id);
 
   if (!user) {
-    return;
+    return next(
+      new AppError("The user who this token belongs to does not exist", 401)
+    );
   }
 
   req.user = user;
   next();
 });
+
+exports.restrictRouteTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError("You do not have permission to perform this action", 403)
+      );
+    }
+    next();
+  };
+};

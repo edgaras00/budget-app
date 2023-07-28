@@ -4,19 +4,21 @@ const authController = require("../controllers/authController");
 
 const router = express.Router();
 
-router
-  .route("/")
-  .get(accountController.getAllAccounts)
-  .post(authController.protectRoute, accountController.createAccount);
+router.use(authController.protectRoute);
 
-router
-  .route("/user")
-  .get(authController.protectRoute, accountController.getUserAccounts);
+router.get(
+  authController.restrictRouteTo("admin"),
+  accountController.getAllAccounts
+);
+
+router.route("/").post(accountController.createAccount);
+
+router.route("/user").get(accountController.getUserAccounts);
 
 router
   .route("/:accountId")
   .get(accountController.getAccount)
-  .patch(authController.protectRoute, accountController.updateAccount)
-  .delete(authController.protectRoute, accountController.deleteAccount);
+  .patch(accountController.updateAccount)
+  .delete(accountController.deleteAccount);
 
 module.exports = router;

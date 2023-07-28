@@ -9,7 +9,6 @@ const userRouter = require("./api/routes/userRouter");
 const transactionRouter = require("./api/routes/transactionRoute");
 const categoryRouter = require("./api/routes/categoryRouter");
 const accountRouter = require("./api/routes/accountRouter");
-const budgetRouter = require("./api/routes/budgetRouter");
 
 const errorController = require("./api/controllers/errorController");
 
@@ -46,7 +45,6 @@ app.use("/api/user", userRouter);
 app.use("/api/transactions", transactionRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/account", accountRouter);
-app.use("/api/budget", budgetRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));

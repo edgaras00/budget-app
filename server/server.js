@@ -5,12 +5,8 @@ const User = require("./api/models/user");
 const Transaction = require("./api/models/transaction");
 const Category = require("./api/models/category");
 const Account = require("./api/models/account");
-const Budget = require("./api/models/budget");
 
 const app = require("./app");
-
-User.hasMany(Budget, { foreignKey: "userId" });
-Budget.belongsTo(User, { foreignKey: "userId" });
 
 User.hasMany(Account);
 Account.belongsTo(User);
@@ -26,9 +22,6 @@ Transaction.belongsTo(Account, {
 
 Category.hasMany(Transaction, { foreignKey: "categoryId" });
 Transaction.belongsTo(Category, { foreignKey: "categoryId" });
-
-Category.hasOne(Budget, { foreignKey: "categoryId" });
-Budget.belongsTo(Category, { foreignKey: "categoryId" });
 
 const startServer = async () => {
   try {

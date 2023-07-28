@@ -9,6 +9,7 @@ const utc = require("dayjs/plugin/utc");
 dayjs.extend(utc);
 
 const catchAsync = require("../../utils/catchAsync");
+const AppError = require("../../utils/appError");
 
 exports.getAllTransactions = catchAsync(async (req, res) => {
   const transactions = await Transaction.findAll();
@@ -95,10 +96,14 @@ exports.getUserTransactions = catchAsync(async (req, res) => {
   });
 });
 
-exports.getTransaction = catchAsync(async (req, res) => {
+exports.getTransaction = catchAsync(async (req, res, next) => {
   const transactionId = req.params.transactionId;
 
   const transaction = await Transaction.findByPk(transactionId);
+
+  if (!transaction) {
+    return next(new AppError("Transaction not found", 404));
+  }
 
   res.status(200).json({
     status: "success",
@@ -122,12 +127,14 @@ exports.createTransaction = catchAsync(async (req, res) => {
   });
 });
 
-exports.updateTransaction = catchAsync(async (req, res) => {
+exports.updateTransaction = catchAsync(async (req, res, next) => {
   const transactionId = req.params.transactionId;
 
   const transaction = await Transaction.findByPk(transactionId);
 
-  if (!transaction) return;
+  if (!transaction) {
+    return next(new AppError("Transaction not found", 404));
+  }
 
   await transaction.update(req.body);
   const updatedTransaction = await Transaction.findByPk(transactionId);
@@ -138,13 +145,15 @@ exports.updateTransaction = catchAsync(async (req, res) => {
   });
 });
 
-exports.deleteTransaction = catchAsync(async (req, res) => {
+exports.deleteTransaction = catchAsync(async (req, res, next) => {
   const transactionId = req.params.transactionId;
   const deletedTransaction = await Transaction.destroy({
     where: { id: transactionId },
   });
 
-  if (!deletedTransaction) return;
+  if (!deletedTransaction) {
+    return next(new AppError("Transaction not found", 404));
+  }
 
   res.status(204).json({
     status: "success",
@@ -185,16 +194,6 @@ exports.getSpendingBreakdown = catchAsync(async (req, res) => {
 
 exports.getMonthlySpending = catchAsync(async (req, res) => {
   const userId = req.user.id;
-
-  // const result = await Transaction.findAll({
-  //   where: { userId },
-  //   attributes: [
-  //     [sequelize.fn("date_trunc", "month", sequelize.col("date")), "month"],
-  //     [sequelize.fn("sum", sequelize.col("amount")), "totalAmount"],
-  //   ],
-  //   group: ["month"],
-  //   raw: true,
-  // });
 
   const categoryTransactions = await Transaction.findAll({
     where: { userId },

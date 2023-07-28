@@ -1,6 +1,8 @@
 const Account = require("../models/account");
 const catchAsync = require("../../utils/catchAsync");
 
+const AppError = require("../../utils/appError");
+
 exports.getAllAccounts = catchAsync(async (req, res) => {
   const accounts = await Account.findAll();
 
@@ -16,8 +18,6 @@ exports.getUserAccounts = catchAsync(async (req, res) => {
     where: { userId: req.user.id },
   });
 
-  console.log(accounts);
-
   const totalBalance = accounts.reduce(
     (accumulator, currentValue) => accumulator + parseInt(currentValue.balance),
     0
@@ -30,12 +30,14 @@ exports.getUserAccounts = catchAsync(async (req, res) => {
   });
 });
 
-exports.getAccount = catchAsync(async (req, res) => {
+exports.getAccount = catchAsync(async (req, res, next) => {
   const accountId = req.params.accountId;
 
   const account = await Account.findByPk(accountId);
 
-  if (!account) return;
+  if (!account) {
+    return next(new AppError("Account not found", 404));
+  }
 
   res.status(200).json({
     status: "success",
@@ -54,11 +56,13 @@ exports.createAccount = catchAsync(async (req, res) => {
   });
 });
 
-exports.updateAccount = catchAsync(async (req, res) => {
+exports.updateAccount = catchAsync(async (req, res, next) => {
   const accountId = req.params.accountId;
   const account = await Account.findByPk(accountId);
 
-  if (!account) return;
+  if (!account) {
+    return next(new AppError("Account not found", 404));
+  }
 
   const updatedFields = [];
   for (key in req.body) {
@@ -74,12 +78,12 @@ exports.updateAccount = catchAsync(async (req, res) => {
   });
 });
 
-exports.deleteAccount = catchAsync(async (req, res) => {
+exports.deleteAccount = catchAsync(async (req, res, next) => {
   const accountId = req.params.accountId;
   const deletedAccount = await Account.destroy({ where: { id: accountId } });
 
   if (!deletedAccount) {
-    throw new Error("something went wrong");
+    return next(new AppError("Account not found", 404));
   }
 
   res.status(204).json({
