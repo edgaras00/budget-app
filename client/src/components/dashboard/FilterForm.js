@@ -5,8 +5,6 @@ import * as yup from "yup";
 
 import { ThemeContext } from "../../context/themeContext";
 
-import { fetchAccountCategoryData } from "../../utils/utils";
-
 import "./styles/transactionForm.css";
 import "./styles/filterForm.css";
 

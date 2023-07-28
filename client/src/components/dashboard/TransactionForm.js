@@ -149,8 +149,6 @@ const TransactionForm = ({
         throw new Error("Something went wrong");
       }
 
-      const responseData = await response.json();
-
       rerenderAfterSubmit();
       handleClose();
     } catch (error) {
