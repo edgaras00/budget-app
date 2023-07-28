@@ -16,15 +16,28 @@ const FilterForm = ({
   transactionCategories,
 }) => {
   const { theme } = useContext(ThemeContext);
-  const [categories, setCategories] = useState([]);
   const [accounts, setAccounts] = useState([]);
+  const [serverError, setServerError] = useState("");
 
   useEffect(() => {
     const fetchAccountsAndCategories = async () => {
-      const accountData = await fetchAccountCategoryData("account");
-      const categoryData = await fetchAccountCategoryData("category");
-      setAccounts(accountData.accounts);
-      setCategories(categoryData.categories);
+      const token = localStorage.getItem("token");
+      try {
+        const response = await fetch("http://localhost:5000/api/account/user", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (!response.ok) {
+          throw new Error("Could not get account data");
+        }
+
+        const responseData = await response.json();
+        setAccounts(responseData.data.accounts);
+      } catch (error) {
+        console.log(error);
+        setServerError(error.message);
+        return;
+      }
     };
     fetchAccountsAndCategories();
   }, []);
@@ -67,39 +80,51 @@ const FilterForm = ({
 
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
-    const selectedCategories = data.categoryOptions || [];
-    const selectedAccounts = data.accountOptions || [];
 
-    const formData = {
-      amountMin: data.amountMin || "",
-      amountMax: data.amountMax || "",
-      categoryOptions: selectedCategories,
-      accountOptions: selectedAccounts,
-    };
+    try {
+      const selectedCategories = data.categoryOptions || [];
+      const selectedAccounts = data.accountOptions || [];
 
-    if (!data.categoryOptions) {
-      formData.categoryOptions = [];
-    }
+      const formData = {
+        amountMin: data.amountMin || "",
+        amountMax: data.amountMax || "",
+        categoryOptions: selectedCategories,
+        accountOptions: selectedAccounts,
+      };
 
-    if (!data.accountOptions) {
-      formData.accountOptions = [];
-    }
-
-    let query = "";
-    for (let key in formData) {
-      if (formData[key] && formData[key].length !== 0) {
-        query += `${key}=${formData[key]}&`;
+      if (!data.categoryOptions) {
+        formData.categoryOptions = [];
       }
-    }
-    const url = "http://localhost:5000/api/transactions/user?" + query;
 
-    const response = await fetch(url, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const responseData = await response.json();
-    console.log(responseData);
-    setTransactions(responseData.data.transactions);
-    handleClose();
+      if (!data.accountOptions) {
+        formData.accountOptions = [];
+      }
+
+      let query = "";
+      for (let key in formData) {
+        if (formData[key] && formData[key].length !== 0) {
+          query += `${key}=${formData[key]}&`;
+        }
+      }
+      const url = "http://localhost:5000/api/transactions/user?" + query;
+
+      const response = await fetch(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (!response.ok) {
+        throw new Error("Something went wrong. Please try again later.");
+      }
+
+      const responseData = await response.json();
+      console.log(responseData);
+      setTransactions(responseData.data.transactions);
+      handleClose();
+    } catch (error) {
+      console.log(error);
+      setServerError(error.message);
+      return;
+    }
   };
 
   const accountOptions = accounts.map((account) => (
@@ -209,6 +234,7 @@ const FilterForm = ({
           {errors.amountMax && <p>{errors.amountMax.message}</p>}
           {errors.categoryOptions && <p>{errors.categoryOptions.message}</p>}
           {errors.accountOptions && <p>{errors.accountOptions.message}</p>}
+          {serverError}
         </div>
         <button type="submit">Save</button>
       </form>

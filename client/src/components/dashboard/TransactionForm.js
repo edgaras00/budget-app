@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 
 import { ThemeContext } from "../../context/themeContext";
 
-import { setRequestOptions, fetchAccountCategoryData } from "../../utils/utils";
+import { setRequestOptions } from "../../utils/utils";
 
 import "./styles/transactionForm.css";
 
@@ -25,17 +25,48 @@ const TransactionForm = ({
   const { theme } = useContext(ThemeContext);
   const [accounts, setAccounts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [serverError, setServerError] = useState("");
 
   useEffect(() => {
     const fetchAccountsAndCategories = async () => {
+      const token = localStorage.getItem("token");
       try {
-        const accountData = await fetchAccountCategoryData("account");
-        const categoryData = await fetchAccountCategoryData("category");
+        const accountResponse = await fetch(
+          "http://localhost:5000/api/account/user",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
 
-        setAccounts(accountData.accounts);
-        setCategories(categoryData.categories);
+        const categoryResponse = await fetch(
+          "http://localhost:5000/api/category",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        if (!accountResponse.ok) {
+          throw new Error("account error");
+        }
+        if (!categoryResponse.ok) {
+          throw new Error("category error");
+        }
+
+        const accountData = await accountResponse.json();
+        const categoryData = await categoryResponse.json();
+
+        setAccounts(accountData.data.accounts);
+        setCategories(categoryData.data.categories);
       } catch (error) {
         console.log(error);
+        if (error.message === "account error") {
+          setServerError("Could not get account data");
+          return;
+        }
+        if (error.message === "category error") {
+          setServerError("Could not get category data");
+          return;
+        }
       }
     };
     fetchAccountsAndCategories();
@@ -83,7 +114,6 @@ const TransactionForm = ({
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
     const token = localStorage.getItem("token");
     try {
       const selectedAccount = accounts.find(
@@ -114,12 +144,19 @@ const TransactionForm = ({
         ? `http://localhost:5000/api/transactions/${id}`
         : "http://localhost:5000/api/transactions";
       const response = await fetch(url, requestOptions);
+
+      if (!response.ok) {
+        throw new Error("Something went wrong");
+      }
+
       const responseData = await response.json();
-      console.log(responseData);
+
       rerenderAfterSubmit();
       handleClose();
     } catch (error) {
       console.log(error);
+      setServerError(error.message);
+      return;
     }
   };
 
@@ -170,6 +207,7 @@ const TransactionForm = ({
           {errors.amount && <p>{errors.amount.message}</p>}
           {errors.category && <p>{errors.category.message}</p>}
           {errors.account && <p>{errors.account.message}</p>}
+          {serverError}
         </div>
         {accounts.length === 0 ? (
           <div>

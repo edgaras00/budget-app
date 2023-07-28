@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -19,6 +19,9 @@ const AccountForm = ({
   rerenderAfterSubmit,
 }) => {
   const { theme } = useContext(ThemeContext);
+
+  const [serverError, setServerError] = useState("");
+
   const schema = yup.object().shape({
     name: yup
       .string()
@@ -60,14 +63,17 @@ const AccountForm = ({
         : "http://localhost:5000/api/account";
       const response = await fetch(url, requestOptions);
 
-      if (!response.ok) throw new Error("Something went wrong");
-      console.log("here");
-      rerenderAfterSubmit();
+      if (!response.ok) {
+        throw new Error("Something went wrong. Please try again later.");
+      }
 
+      rerenderAfterSubmit();
       reset();
       handleClose();
     } catch (error) {
       console.log(error);
+      setServerError(error.message);
+      return;
     }
   };
 
@@ -101,6 +107,7 @@ const AccountForm = ({
           {errors.name && <p>{errors.name.message}</p>}
           {errors.accountType && <p>{errors.accountType.message}</p>}
           {errors.balance && <p>{errors.balance.message}</p>}
+          {serverError}
         </div>
         <button type="submit">{modify ? "Save" : "Add"} Account</button>
       </form>
