@@ -13,8 +13,11 @@ const handleDuplicateError = (err) => {
   return new AppError(message, 400);
 };
 
-const handleJWTError = (err) =>
+const handleJWTError = () =>
   new AppError("Invalid token. Please log in again", 401);
+
+const handleJWTExpiredError = () =>
+  new AppError("Your token has expird. Please log in again", 401);
 
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
@@ -24,9 +27,6 @@ const sendErrorDev = (err, res) => {
     stack: err.stack,
   });
 };
-
-const handleJWTExpiredError = () =>
-  new AppError("Your token has expird. Please log in again", 401);
 
 const sendErrorProd = (err, res) => {
   console.log(err);
@@ -50,9 +50,9 @@ module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
 
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV === "production") {
     sendErrorDev(err, res);
-  } else if (process.env.NODE_ENV === "production") {
+  } else if (process.env.NODE_ENV === "development") {
     let error = { ...err };
     error.message = err.message;
     error.name = err.name;

@@ -60,6 +60,7 @@
 .form-errors {
   font-weight: 500;
   color: #fc390e;
+  margin-top: 0.3rem;
 }
 
 .form-errors-dark {

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,6 +14,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const { theme } = useContext(ThemeContext);
+  const [loginError, setLoginError] = useState("");
 
   const schema = yup.object().shape({
     email: yup
@@ -46,12 +47,10 @@ const LoginForm = () => {
       );
       const responseData = await response.json();
 
-      console.log(responseData);
-
-      if ("user" in responseData.data) {
-        const user = responseData.data.user;
-        localStorage.setItem("user", JSON.stringify(user));
+      if (response.status !== 200) {
+        throw new Error(responseData.message);
       }
+
       localStorage.setItem("token", responseData.token);
 
       navigate("/dashboard");
@@ -59,6 +58,10 @@ const LoginForm = () => {
       reset();
     } catch (error) {
       console.log(error);
+      if (error.message === "Incorrect email or password") {
+        setLoginError(error.message);
+      }
+      return;
     }
   };
 
@@ -89,6 +92,7 @@ const LoginForm = () => {
         >
           {errors.email && <p>{errors.email.message}</p>}
           {errors.password && <p>{errors.password.message}</p>}
+          {loginError}
         </div>
         <button type="submit">Log in</button>
         <p className="signup-account">

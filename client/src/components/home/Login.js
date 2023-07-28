@@ -9,6 +9,7 @@ import "./styles/login.css";
 
 const Login = () => {
   useRedirect();
+
   const { theme } = useContext(ThemeContext);
   return (
     <div

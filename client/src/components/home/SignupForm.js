@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,6 +14,7 @@ const SignupForm = () => {
   const navigate = useNavigate();
 
   const { theme } = useContext(ThemeContext);
+  const [signupError, setSignupError] = useState("");
 
   const schema = yup.object().shape({
     name: yup
@@ -55,26 +56,30 @@ const SignupForm = () => {
         },
         null
       );
-      console.log(requestOptions);
+
       const response = await fetch(
         "http://localhost:5000/api/user/signup",
         requestOptions
       );
+
       const responseData = await response.json();
+
+      if (response.status !== 201) {
+        throw new Error(responseData.message);
+      }
 
       console.log(responseData);
 
-      if ("user" in responseData.data) {
-        const user = responseData.data.user;
-        // setUser(user);
-        localStorage.setItem("user", JSON.stringify(user));
-      }
       localStorage.setItem("token", responseData.token);
       navigate("/dashboard");
 
       reset();
     } catch (error) {
       console.log(error);
+      if (error.message === "email must be unique") {
+        setSignupError("User with this email already exists");
+      }
+      return;
     }
   };
 
@@ -114,6 +119,7 @@ const SignupForm = () => {
           {errors.email && <p>{errors.email.message}</p>}
           {errors.password && <p>{errors.password.message}</p>}
           {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+          {signupError}
         </div>
         <button type="submit">Sign up</button>
         <p className="signup-account">
