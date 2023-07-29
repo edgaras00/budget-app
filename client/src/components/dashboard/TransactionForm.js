@@ -16,11 +16,12 @@ const TransactionForm = ({
   id,
   name,
   date,
-  account,
-  category,
+
   rerenderAfterSubmit,
   handleClose,
   amount,
+  mobile,
+  removeTransaction,
 }) => {
   const { theme } = useContext(ThemeContext);
   const [accounts, setAccounts] = useState([]);
@@ -208,6 +209,13 @@ const TransactionForm = ({
           <button type="submit">Save</button>
         )}
       </form>
+      {mobile ? (
+        <div className="remove-txn-container">
+          <button className="remove-txn" onClick={removeTransaction}>
+            Remove
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import CustomModal from "./CustomModal";
 import TransactionForm from "./TransactionForm";
 
 import { ThemeContext } from "../../context/themeContext";
+import useWidth from "../../hooks/useWidth";
 
 // Images
 import clothingImage from "../../images/clothing.svg";
@@ -33,10 +34,6 @@ import miscImage from "../../images/default.svg";
 
 import "./styles/transaction.css";
 
-// const centsToDollars = (amountCents) => {
-//   return amountCents / 100;
-// };
-
 const Transaction = ({
   name,
   amount,
@@ -48,10 +45,15 @@ const Transaction = ({
   rerenderAfterSubmit,
 }) => {
   const { theme } = useContext(ThemeContext);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModalOpen = () => setIsModalOpen(true);
-  const handleModalClose = () => setIsModalOpen(false);
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
   const [imageLoadError, setImageLoadError] = useState(false);
+  const { width } = useWidth();
 
   let defaultImg = miscImage;
 
@@ -125,7 +127,7 @@ const Transaction = ({
     const token = localStorage.getItem("token");
 
     try {
-      await fetch(`http://localhost:5000/api/transactions/${id}`, {
+      await fetch(`api/transactions/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -138,7 +140,10 @@ const Transaction = ({
   };
 
   return (
-    <tr className={`table-row ${theme === "dark" ? "table-row-dark" : null}`}>
+    <tr
+      className={`table-row ${theme === "dark" ? "table-row-dark" : null}`}
+      onClick={width <= 700 && !isModalOpen ? handleModalOpen : null}
+    >
       <td className="transaction">
         <div className="image-container">
           <img
@@ -187,6 +192,8 @@ const Transaction = ({
               modify={true}
               handleClose={handleModalClose}
               rerenderAfterSubmit={rerenderAfterSubmit}
+              mobile={width < 600 ? true : false}
+              removeTransaction={removeTransaction}
             />
           }
         />

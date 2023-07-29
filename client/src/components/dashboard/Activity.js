@@ -37,8 +37,6 @@ const Activity = ({
     id: transaction.categoryId,
   }));
 
-  console.log(transactionCategories);
-
   const transactionComponents = transactions.map((transaction) => {
     return (
       <Transaction

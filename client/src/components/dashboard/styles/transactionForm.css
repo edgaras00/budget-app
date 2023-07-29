@@ -43,7 +43,8 @@
   margin-bottom: 0.2rem;
 }
 
-.transaction-form button {
+.transaction-form button,
+.remove-txn {
   width: 140px;
   height: 48px;
   border: none;
@@ -53,6 +54,17 @@
   color: #fff;
   font-size: 1.05rem;
   margin-top: 0.8rem;
+}
+
+.remove-txn-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.remove-txn {
+  background-color: #ca4224;
+  font-size: 1rem;
 }
 
 .transaction-form button:hover {

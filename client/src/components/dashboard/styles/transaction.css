@@ -208,4 +208,8 @@
     font-size: 0.8rem;
     padding: 10px 3px;
   }
+
+  .transaction-edit {
+    display: none;
+  }
 }

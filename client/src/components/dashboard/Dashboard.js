@@ -56,8 +56,6 @@ const Dashboard = () => {
     sortData("date", newDateSort);
   };
 
-  console.log(transactions);
-
   const toggleCategorySort = () => {
     const newCategorySort = categorySort === "ASC" ? "DESC" : "ASC";
     setCategorySort(newCategorySort);
