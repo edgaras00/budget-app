@@ -19,14 +19,14 @@ exports.getUserAccounts = catchAsync(async (req, res) => {
   });
 
   const totalBalance = accounts.reduce(
-    (accumulator, currentValue) => accumulator + parseInt(currentValue.balance),
+    (accumulator, currentValue) => accumulator + Number(currentValue.balance),
     0
   );
 
   res.status(200).json({
     status: "success",
     results: accounts.length,
-    data: { accounts, totalBalance },
+    data: { accounts, totalBalance: totalBalance.toFixed(2) },
   });
 });
 

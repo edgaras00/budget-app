@@ -171,7 +171,7 @@ const TransactionForm = ({
         </div>
         <div className="input-wrapper">
           <label>Amount</label>
-          <input type="number" {...register("amount")} />
+          <input type="number" {...register("amount")} step="0.01" />
         </div>
         <div className="input-wrapper">
           <label>Category</label>

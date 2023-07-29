@@ -31,7 +31,10 @@ const AccountForm = ({
       .string()
       .required("Please enter account type")
       .max(30, "Account type cannot exceed more than 30 characters"),
-    balance: yup.number().required("Please enter your balance"),
+    balance: yup
+      .number()
+      .required("Please enter your balance")
+      .positive("New balance must be positive"),
   });
 
   const {
@@ -95,7 +98,7 @@ const AccountForm = ({
         </div>
         <div className="input-wrapper">
           <label>Balance</label>
-          <input {...register("balance")} type="number" />
+          <input {...register("balance")} type="number" step="0.01" />
         </div>
         <div
           className={`form-errors ${

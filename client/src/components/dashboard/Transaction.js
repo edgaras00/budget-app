@@ -142,7 +142,7 @@ const Transaction = ({
   return (
     <tr
       className={`table-row ${theme === "dark" ? "table-row-dark" : null}`}
-      onClick={width <= 700 && !isModalOpen ? handleModalOpen : null}
+      onClick={width <= 420 && !isModalOpen ? handleModalOpen : null}
     >
       <td className="transaction">
         <div className="image-container">
@@ -163,7 +163,7 @@ const Transaction = ({
           </div>
         </div>
       </td>
-      <td className="transaction-amount">{amount}</td>
+      <td className="transaction-amount">${amount}</td>
       <td>
         <div className={`category ${category.toLowerCase()}`}>{category}</div>
       </td>

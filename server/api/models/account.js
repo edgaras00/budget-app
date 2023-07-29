@@ -17,7 +17,7 @@ const Account = sequelize.define("account", {
     },
   },
   balance: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DECIMAL(10, 2),
     defaultValue: 0,
     validate: {
       min: 0,

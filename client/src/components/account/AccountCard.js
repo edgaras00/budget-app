@@ -36,7 +36,7 @@ const AccountCard = ({
         <div className="account-name">{name}</div>
         <div className="account-type">{accountType}</div>
       </div>
-      <div className="account-balance">{balance}</div>
+      <div className="account-balance">${balance}</div>
       <div className="account-buttons">
         <div onClick={handleOpenModal} className="account-action edit">
           Edit
