@@ -31,19 +31,13 @@ const TransactionForm = ({
     const fetchAccountsAndCategories = async () => {
       const token = localStorage.getItem("token");
       try {
-        const accountResponse = await fetch(
-          "http://localhost:5000/api/account/user",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const accountResponse = await fetch("/api/account/user", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
-        const categoryResponse = await fetch(
-          "http://localhost:5000/api/category",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const categoryResponse = await fetch("/api/category", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
         if (!accountResponse.ok) {
           throw new Error("account error");
@@ -140,9 +134,7 @@ const TransactionForm = ({
         token
       );
 
-      const url = modify
-        ? `http://localhost:5000/api/transactions/${id}`
-        : "http://localhost:5000/api/transactions";
+      const url = modify ? `/api/transactions/${id}` : "/api/transactions";
       const response = await fetch(url, requestOptions);
 
       if (!response.ok) {

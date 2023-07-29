@@ -73,16 +73,13 @@ const Activity = ({
             <img
               src={theme === "dark" ? filterImageDark : filterImage}
               alt="filter transactions"
-              width={28}
-              height={28}
+              className="filter"
             />
             <div>Apply Filter</div>
           </div>
           <img
             src={theme === "dark" ? newTxnImageDark : newTxnImage}
             alt="add new transaction"
-            width={44}
-            height={44}
             className="add"
             onClick={handleOpen}
           />

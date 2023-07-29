@@ -16,6 +16,10 @@ const SignupForm = () => {
   const { theme } = useContext(ThemeContext);
   const [signupError, setSignupError] = useState("");
 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const schema = yup.object().shape({
     name: yup
       .string()
@@ -56,12 +60,7 @@ const SignupForm = () => {
         },
         null
       );
-
-      const response = await fetch(
-        "http://localhost:5000/api/user/signup",
-        requestOptions
-      );
-
+      const response = await fetch("/api/user/signup", requestOptions);
       const responseData = await response.json();
 
       if (response.status !== 201) {

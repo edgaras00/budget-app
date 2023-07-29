@@ -24,8 +24,6 @@ const Accounts = () => {
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
-  console.log(formSubmit);
-
   const rerenderAfterSubmit = () =>
     setFormSubmit((submission) => submission + 1);
 
@@ -38,7 +36,7 @@ const Accounts = () => {
           return;
         }
 
-        const response = await fetch("http://localhost:5000/api/account/user", {
+        const response = await fetch("/api/account/user", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

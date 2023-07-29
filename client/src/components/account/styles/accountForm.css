@@ -58,5 +58,8 @@
   background-color: rgb(98, 98, 245);
 }
 
-@media (max-width: 570px) {
+@media (max-width: 420px) {
+  .input-wrapper {
+    width: 70%;
+  }
 }

@@ -24,3 +24,13 @@
     justify-content: center;
   }
 }
+
+@media (max-width: 420px) {
+  .goals-btn-container {
+    justify-content: flex-start;
+  }
+
+  .dashboard-container {
+    padding-top: 3rem;
+  }
+}

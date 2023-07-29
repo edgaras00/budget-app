@@ -1,11 +1,16 @@
 .modal-box {
   width: 500px;
+  height: 86vh;
 }
 
 .close {
   font-size: 1.6rem;
   cursor: pointer;
-  display: none;
+  /* display: none; */
+}
+
+.close:hover {
+  opacity: 0.5;
 }
 
 @media (max-width: 560px) {
@@ -13,7 +18,14 @@
     width: 450px;
   }
 
-  .close {
+  /* .close {
     display: block;
+  } */
+}
+
+@media (max-width: 420px) {
+  .modal-box {
+    width: 300px;
+    height: 500px;
   }
 }

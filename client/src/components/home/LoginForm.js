@@ -41,10 +41,7 @@ const LoginForm = () => {
     try {
       const requestOptions = setRequestOptions("POST", data, null);
 
-      const response = await fetch(
-        "http://localhost:5000/api/user/login",
-        requestOptions
-      );
+      const response = await fetch("/api/user/login", requestOptions);
       const responseData = await response.json();
 
       if (response.status !== 200) {

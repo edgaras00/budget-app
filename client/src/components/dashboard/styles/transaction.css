@@ -3,10 +3,6 @@
   margin-bottom: 1.3rem;
 }
 
-.table-row-dark {
-  border: 1px solid red;
-}
-
 .transaction {
   display: flex;
   justify-content: space-evenly;
@@ -196,5 +192,20 @@
 
   .edit-txn {
     font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .table-row td {
+    height: 80px;
+  }
+
+  .image-container {
+    display: none;
+  }
+
+  .category {
+    font-size: 0.8rem;
+    padding: 10px 3px;
   }
 }

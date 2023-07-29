@@ -21,7 +21,7 @@ const FilterForm = ({
     const fetchAccountsAndCategories = async () => {
       const token = localStorage.getItem("token");
       try {
-        const response = await fetch("http://localhost:5000/api/account/user", {
+        const response = await fetch("/api/account/user", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -104,7 +104,7 @@ const FilterForm = ({
           query += `${key}=${formData[key]}&`;
         }
       }
-      const url = "http://localhost:5000/api/transactions/user?" + query;
+      const url = "/api/transactions/user?" + query;
 
       const response = await fetch(url, {
         headers: { Authorization: `Bearer ${token}` },
@@ -207,21 +207,13 @@ const FilterForm = ({
             <input type="number" {...register("amountMax")} />
           </div>
         </div>
-        {/* <div className="input-wrapper">
-          <label>Start date</label>
-          <input type="date" {...register("startDate")} />
-        </div>
-        <div className="input-wrapper">
-          <label>End date</label>
-          <input type="date" {...register("endDate")} />
-        </div> */}
         <div className="filter-accounts">
           <div className="option-heading">Accounts</div>
-          <div className="account-options">{accountOptions}</div>
+          <div className="filter-options">{accountOptions}</div>
         </div>
         <div className="filter-accounts">
           <div className="option-heading">Categories</div>
-          <div className="category-options">{categoryOptions}</div>
+          <div className="filter-options">{categoryOptions}</div>
         </div>
         <div
           className={`form-errors ${

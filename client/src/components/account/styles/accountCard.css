@@ -68,3 +68,21 @@
     width: 94%;
   }
 }
+
+@media (max-width: 420px) {
+  .account-name {
+    font-size: 1.2rem;
+  }
+
+  .account-type {
+    font-size: 0.9rem;
+  }
+
+  .account-balance {
+    font-size: 1.5rem;
+  }
+
+  .edit {
+    font-size: 0.9rem;
+  }
+}

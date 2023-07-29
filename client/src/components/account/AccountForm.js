@@ -58,15 +58,13 @@ const AccountForm = ({
         token
       );
 
-      const url = modify
-        ? `http://localhost:5000/api/account/${accountId}`
-        : "http://localhost:5000/api/account";
+      const url = modify ? `/api/account/${accountId}` : "/api/account";
       const response = await fetch(url, requestOptions);
 
       if (!response.ok) {
         throw new Error("Something went wrong. Please try again later.");
       }
-
+      alert("Hello");
       rerenderAfterSubmit();
       reset();
       handleClose();

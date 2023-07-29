@@ -52,3 +52,9 @@
     width: 88%;
   }
 }
+
+@media (max-width: 420px) {
+  .total-text-wrapper {
+    font-size: 1.2rem;
+  }
+}

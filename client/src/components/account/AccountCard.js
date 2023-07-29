@@ -17,7 +17,7 @@ const AccountCard = ({
   const removeAccount = async () => {
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch(`http://localhost:5000/api/account/${id}`, {
+      const response = await fetch(`/api/account/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

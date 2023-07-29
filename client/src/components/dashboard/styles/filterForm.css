@@ -16,18 +16,13 @@
   margin-bottom: 0.8rem;
 }
 
-.category-options {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
+.filter-options {
+  display: flex;
+  flex-direction: column;
 }
 
 .option-heading {
   margin-bottom: 0.8rem;
-}
-
-.account-options {
-  width: 90%;
-  display: flex;
 }
 
 .category-check,
@@ -38,6 +33,7 @@
 
 .checkbox {
   font-size: 0.9rem;
+  margin-bottom: 0.5rem;
 }
 
 .category-check label,
@@ -48,4 +44,12 @@
 .checkbox input {
   width: 24px;
   height: 24px;
+}
+
+@media (max-width: 420px) {
+  .amounts {
+    height: 180px;
+    flex-direction: column;
+    align-items: center;
+  }
 }

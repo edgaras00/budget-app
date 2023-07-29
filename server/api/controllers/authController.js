@@ -35,7 +35,6 @@ const createAndSendToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res) => {
-  console.log("Route hit");
   console.log(req.body);
   const newUser = {
     name: req.body.name,

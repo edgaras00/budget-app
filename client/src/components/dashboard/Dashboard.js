@@ -32,7 +32,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:5000/api/transactions/user?sort=${col}&order=${order}`,
+        `/api/transactions/user?sort=${col}&order=${order}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -77,12 +77,9 @@ const Dashboard = () => {
       try {
         if (!token) return;
 
-        const response = await fetch(
-          "http://localhost:5000/api/transactions/user",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const response = await fetch("/api/transactions/user", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         const responseData = await response.json();
 
         setTransactions(responseData.data.transactions);
@@ -97,14 +94,11 @@ const Dashboard = () => {
     const fetchSpendingBreakdown = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch(
-          "http://localhost:5000/api/transactions/breakdown",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await fetch("/api/transactions/breakdown", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const responseData = await response.json();
 
         const spendingBreakdown = responseData.data.spendingBreakdown.map(
@@ -126,12 +120,9 @@ const Dashboard = () => {
     const fetchMonthlySpending = async () => {
       const token = localStorage.getItem("token");
       try {
-        const response = await fetch(
-          "http://localhost:5000/api/transactions/monthly",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const response = await fetch("/api/transactions/monthly", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         const responseData = await response.json();
         setMonthlySpending(responseData.data.monthlyTransactions);
         setCategories(responseData.data.categories);

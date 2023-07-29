@@ -24,7 +24,7 @@ const EmptyPage = ({ missingData, openModal }) => {
         >
           Add {missingData}
         </div>
-        <img src={emptyImage} alt="blank page" width={100} height={100} />
+        <img src={emptyImage} alt="blank page" className="blank-page" />
       </div>
     </div>
   );

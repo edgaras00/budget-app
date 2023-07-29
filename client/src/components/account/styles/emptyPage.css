@@ -42,3 +42,44 @@
 .empty-add-data-dark {
   color: #ffffff;
 }
+
+.blank-page {
+  width: 100px;
+  height: 100px;
+}
+
+@media (max-width: 600px) {
+  .empty-content {
+    width: 80%;
+  }
+}
+
+@media (max-width: 530px) {
+  .empty-content {
+    width: 90%;
+  }
+
+  .empty-heading {
+    font-size: 1.6rem;
+  }
+
+  .blank-page {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+@media (max-width: 420px) {
+  .empty-container {
+    padding-top: 8rem;
+  }
+
+  .empty-content {
+    width: 80%;
+    height: 40vh;
+  }
+
+  .empty-heading {
+    font-size: 1.4rem;
+  }
+}

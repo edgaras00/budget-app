@@ -14,7 +14,7 @@ const CustomModal = ({ open, handleClose, form }) => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    height: "86vh",
+    // height: "80vh",
     // width: 500,
     bgcolor: theme === "dark" ? "#4e4e4e" : "background.paper",
     boxShadow: 24,

@@ -93,9 +93,16 @@
   color: transparent;
 }
 
+.filter {
+  width: 28px;
+  height: 28px;
+}
+
 .add {
   cursor: pointer;
   background-color: #333333;
+  width: 44px;
+  height: 44px;
 }
 
 .add:hover {
@@ -154,5 +161,21 @@
   .select-option {
     width: 75px;
     padding: 0.9rem 0.3rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .activity-container {
+    width: 94%;
+  }
+
+  .add {
+    width: 40px;
+    height: 40px;
+  }
+
+  .filter {
+    width: 23px;
+    height: 23px;
   }
 }
