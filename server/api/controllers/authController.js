@@ -35,7 +35,6 @@ const createAndSendToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res) => {
-  console.log(req.body);
   const newUser = {
     name: req.body.name,
     email: req.body.email,
@@ -121,4 +120,8 @@ exports.restrictRouteTo = (...roles) => {
     }
     next();
   };
+};
+
+exports.validate = (req, res) => {
+  res.status(200);
 };

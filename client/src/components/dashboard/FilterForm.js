@@ -200,11 +200,11 @@ const FilterForm = ({
         <div className="amounts">
           <div className="filter-amount">
             <label>Minimum amount</label>
-            <input type="number" {...register("amountMin")} />
+            <input type="number" {...register("amountMin")} step="0.01" />
           </div>
           <div className="filter-amount">
             <label>Maximum amount</label>
-            <input type="number" {...register("amountMax")} />
+            <input type="number" {...register("amountMax")} step="0.01" />
           </div>
         </div>
         <div className="filter-accounts">

@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 
 import { ThemeContext } from "../../context/themeContext";
 
-import { setRequestOptions } from "../../utils/utils";
+import { setRequestOptions, capitalize } from "../../utils/utils";
 
 import "./styles/transactionForm.css";
 
@@ -76,7 +76,7 @@ const TransactionForm = ({
   });
 
   const categoryOptions = categories.map((category) => {
-    return <option key={category.id}>{category.name}</option>;
+    return <option key={category.id}>{capitalize(category.name)}</option>;
   });
 
   const numberField = yup
@@ -116,7 +116,7 @@ const TransactionForm = ({
       );
 
       const selectedCategory = categories.find(
-        (category) => category.name === data.category
+        (category) => category.name === data.category.toLowerCase()
       );
 
       if (!selectedAccount || !selectedCategory) return;

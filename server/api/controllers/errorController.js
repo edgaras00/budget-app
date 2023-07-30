@@ -32,6 +32,7 @@ const sendErrorProd = (err, res) => {
   console.log(err);
   // Operational errors can be sent to client
   if (err.isOperational) {
+    console.log("Here");
     res.status(err.statusCode).json({
       status: err.status,
       message: err.message,

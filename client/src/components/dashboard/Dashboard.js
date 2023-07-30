@@ -12,7 +12,6 @@ import useAuth from "../../hooks/useAuth";
 
 const Dashboard = () => {
   useAuth();
-
   const { theme } = useContext(ThemeContext);
   const [transactions, setTransactions] = useState([]);
   const [spendingBreakdown, setSpendingBreakdown] = useState([]);
@@ -79,6 +78,13 @@ const Dashboard = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         const responseData = await response.json();
+
+        if (!response.ok) {
+          if (response.status === 401) {
+            throw new Error("Auth error");
+          }
+          throw new Error("Something went wrong");
+        }
 
         setTransactions(responseData.data.transactions);
       } catch (error) {

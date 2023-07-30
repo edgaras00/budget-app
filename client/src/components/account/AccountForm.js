@@ -67,7 +67,6 @@ const AccountForm = ({
       if (!response.ok) {
         throw new Error("Something went wrong. Please try again later.");
       }
-      alert("Hello");
       rerenderAfterSubmit();
       reset();
       handleClose();

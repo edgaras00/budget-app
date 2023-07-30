@@ -46,7 +46,6 @@ exports.getAccount = catchAsync(async (req, res, next) => {
 });
 
 exports.createAccount = catchAsync(async (req, res) => {
-  console.log("Hit here");
   const userId = req.user.id;
   const account = await Account.create({ ...req.body, userId });
 

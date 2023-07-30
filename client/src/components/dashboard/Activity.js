@@ -32,10 +32,23 @@ const Activity = ({
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const transactionCategories = transactions.map((transaction) => ({
-    name: transaction.category.name,
-    id: transaction.categoryId,
-  }));
+  const categoryIdRef = [];
+  const transactionCategories = [];
+  transactions.forEach((transaction) => {
+    const categoryId = transaction.categoryId;
+    if (!categoryIdRef.includes(categoryId)) {
+      categoryIdRef.push(categoryId);
+      transactionCategories.push({
+        name: transaction.category.name,
+        id: categoryId,
+      });
+    }
+  });
+
+  // const transactionCategories = transactions.map((transaction) => ({
+  //   name: transaction.category.name,
+  //   id: transaction.categoryId,
+  // }));
 
   const transactionComponents = transactions.map((transaction) => {
     return (
