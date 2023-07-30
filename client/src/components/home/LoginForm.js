@@ -8,7 +8,7 @@ import { ThemeContext } from "../../context/themeContext";
 
 import { setRequestOptions } from "../../utils/utils";
 
-import "./styles/signupForm.css";
+import "./styles/authForm.css";
 
 const LoginForm = () => {
   const navigate = useNavigate();

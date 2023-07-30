@@ -1,15 +1,12 @@
 import { useContext } from "react";
-import LoginForm from "./LoginForm";
 
 import { ThemeContext } from "../../context/themeContext";
 
 import useRedirect from "../../hooks/useRedirect";
+import "./styles/userForms.css";
 
-import "./styles/login.css";
-
-const Login = () => {
+const UserForms = ({ form, heading }) => {
   useRedirect();
-
   const { theme } = useContext(ThemeContext);
   return (
     <div
@@ -17,10 +14,10 @@ const Login = () => {
         theme === "dark" ? "login-container-dark" : null
       }`}
     >
-      <h1 className="login-heading">Log in</h1>
-      <LoginForm />
+      <h1 className="login-heading">{heading}</h1>
+      {form}
     </div>
   );
 };
 
-export default Login;
+export default UserForms;

@@ -39,16 +39,11 @@ const Activity = ({
     if (!categoryIdRef.includes(categoryId)) {
       categoryIdRef.push(categoryId);
       transactionCategories.push({
-        name: transaction.category.name,
+        name: transaction["category.name"],
         id: categoryId,
       });
     }
   });
-
-  // const transactionCategories = transactions.map((transaction) => ({
-  //   name: transaction.category.name,
-  //   id: transaction.categoryId,
-  // }));
 
   const transactionComponents = transactions.map((transaction) => {
     return (
@@ -58,9 +53,9 @@ const Activity = ({
         name={transaction.name}
         amount={transaction.amount}
         date={transaction.date}
-        category={transaction.category.name}
-        account={transaction.account ? transaction.account.name : ""}
-        accountType={transaction.account ? transaction.account.accountType : ""}
+        category={transaction["category.name"]}
+        account={transaction["account.name"]}
+        accountType={transaction["account.accountType"]}
         rerenderAfterSubmit={rerenderAfterSubmit}
       />
     );

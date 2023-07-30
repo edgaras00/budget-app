@@ -3,8 +3,9 @@ import { Route, Routes } from "react-router-dom";
 
 // Home components
 import Home from "./components/home/Home";
-import Login from "./components/home/Login";
-import Signup from "./components/home/Signup";
+import UserForms from "./components/home/UserForms";
+import LoginForm from "./components/home/LoginForm";
+import SignupForm from "./components/home/SignupForm";
 import Nav from "./components/home/Nav";
 
 // Dashboard components
@@ -24,8 +25,19 @@ function App() {
       <Nav />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/signup"
+          element={
+            <UserForms
+              form={<SignupForm />}
+              heading="Create Your NextBudget Account"
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={<UserForms form={<LoginForm />} heading="Log in" />}
+        />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/accounts" element={<Accounts />} />
       </Routes>

@@ -120,12 +120,6 @@ const TransactionForm = ({
         );
       });
 
-      console.log(selectedAccount);
-
-      // const selectedAccount = accounts.find(
-      //   (account) => account.name === data.account.split("|")[0].trim() && account
-      // );
-
       const selectedCategory = categories.find(
         (category) => category.name === data.category.toLowerCase()
       );

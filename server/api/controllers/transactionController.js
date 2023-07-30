@@ -87,12 +87,20 @@ exports.getUserTransactions = catchAsync(async (req, res) => {
       exclude: ["createdAt", "updatedAt"],
     },
     order: [sortBy],
+    raw: true,
   });
+
+  const userTransactions = transactions.map((transaction) => {
+    transaction.date = dayjs.utc(transaction.date).format("DD MMM YYYY");
+    return transaction;
+  });
+
+  console.log(userTransactions);
 
   res.status(200).json({
     status: "success",
     results: transactions.length,
-    data: { transactions },
+    data: { transactions: userTransactions },
   });
 });
 
