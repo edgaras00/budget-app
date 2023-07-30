@@ -16,6 +16,7 @@ exports.getAllAccounts = catchAsync(async (req, res) => {
 exports.getUserAccounts = catchAsync(async (req, res) => {
   const accounts = await Account.findAll({
     where: { userId: req.user.id },
+    order: [["name", "ASC"]],
   });
 
   const totalBalance = accounts.reduce(

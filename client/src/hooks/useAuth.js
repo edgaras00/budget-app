@@ -6,6 +6,7 @@ const useAuth = () => {
 
   useEffect(() => {
     const validateToken = async (token) => {
+      console.log("validating");
       try {
         const response = await fetch("/api/user/validate", {
           headers: { Authorization: `Bearer ${token}` },

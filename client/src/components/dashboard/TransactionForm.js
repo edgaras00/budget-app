@@ -111,9 +111,20 @@ const TransactionForm = ({
   const onSubmit = async (data) => {
     const token = localStorage.getItem("token");
     try {
-      const selectedAccount = accounts.find(
-        (account) => account.name === data.account.split("|")[0].trim()
-      );
+      const selectedAccount = accounts.find((account) => {
+        const nameAndType = data.account.split("|");
+        const accountName = nameAndType[0].trim();
+        const accountType = nameAndType[1].trim();
+        return (
+          account.name === accountName && account.accountType === accountType
+        );
+      });
+
+      console.log(selectedAccount);
+
+      // const selectedAccount = accounts.find(
+      //   (account) => account.name === data.account.split("|")[0].trim() && account
+      // );
 
       const selectedCategory = categories.find(
         (category) => category.name === data.category.toLowerCase()
