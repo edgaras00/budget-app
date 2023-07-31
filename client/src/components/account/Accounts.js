@@ -36,7 +36,11 @@ const Accounts = () => {
           return;
         }
 
-        const response = await fetch("/api/account/user", {
+        let url = "https://nextbudget-server.onrender.com/api/account/user";
+        if (process.env.REACT_APP_ENV === "development") {
+          url = "/api/account/user";
+        }
+        const response = await fetch(url, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -17,7 +17,11 @@ const AccountCard = ({
   const removeAccount = async () => {
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch(`/api/account/${id}`, {
+      let url = `https://nextbudget-server.onrender.com/api/account/${id}`;
+      if (process.env.REACT_APP_ENV === "development") {
+        url = `/api/account/${id}`;
+      }
+      const response = await fetch(url, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

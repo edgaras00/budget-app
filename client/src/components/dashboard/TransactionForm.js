@@ -32,11 +32,21 @@ const TransactionForm = ({
     const fetchAccountsAndCategories = async () => {
       const token = localStorage.getItem("token");
       try {
-        const accountResponse = await fetch("/api/account/user", {
+        let accountUrl =
+          "https://nextbudget-server.onrender.com/api/account/user";
+        if (process.env.REACT_APP_ENV === "development") {
+          accountUrl = "/api/account/user";
+        }
+
+        const accountResponse = await fetch(accountUrl, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        const categoryResponse = await fetch("/api/category", {
+        let categoryUrl = "https://nextbudget-server.onrender.com/api/category";
+        if (process.env.REACT_APP_ENV === "development") {
+          categoryUrl = "/api/category";
+        }
+        const categoryResponse = await fetch(categoryUrl, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -140,7 +150,12 @@ const TransactionForm = ({
         token
       );
 
-      const url = modify ? `/api/transactions/${id}` : "/api/transactions";
+      let url = `https://nextbudget-server.onrender.com/api/transactions/${
+        modify ? id : ""
+      }`;
+      if (process.env.REACT_APP_ENV === "development") {
+        url = `/api/transactions/${modify ? id : ""}`;
+      }
       const response = await fetch(url, requestOptions);
 
       if (!response.ok) {

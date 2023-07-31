@@ -127,7 +127,11 @@ const Transaction = ({
     const token = localStorage.getItem("token");
 
     try {
-      await fetch(`api/transactions/${id}`, {
+      let url = `https://nextbudget-server.onrender.com/api/transactions/${id}`;
+      if (process.env.REACT_APP_ENV) {
+        url = `api/transactions/${id}`;
+      }
+      await fetch(url, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

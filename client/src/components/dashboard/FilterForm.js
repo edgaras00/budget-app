@@ -21,7 +21,11 @@ const FilterForm = ({
     const fetchAccountsAndCategories = async () => {
       const token = localStorage.getItem("token");
       try {
-        const response = await fetch("/api/account/user", {
+        let url = "https://nextbudget-server.onrender.com/api/account/user";
+        if (process.env.REACT_APP_ENV) {
+          url = "/api/account/user";
+        }
+        const response = await fetch(url, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -104,7 +108,11 @@ const FilterForm = ({
           query += `${key}=${formData[key]}&`;
         }
       }
-      const url = "/api/transactions/user?" + query;
+
+      let url = `https://nextbudget-server.onrender.com/api/transactions/user?${query}`;
+      if (process.env.REACT_APP_ENV === "development") {
+        url = `/api/transactions/user?${query}`;
+      }
 
       const response = await fetch(url, {
         headers: { Authorization: `Bearer ${token}` },

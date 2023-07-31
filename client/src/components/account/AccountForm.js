@@ -61,7 +61,12 @@ const AccountForm = ({
         token
       );
 
-      const url = modify ? `/api/account/${accountId}` : "/api/account";
+      let url = `https://nextbudget-server.onrender.com/api/account/${
+        modify ? accountId : ""
+      }`;
+      if (process.env.REACT_APP_ENV === "development") {
+        url = modify ? `/api/account/${accountId}` : "/api/account";
+      }
       const response = await fetch(url, requestOptions);
 
       if (!response.ok) {

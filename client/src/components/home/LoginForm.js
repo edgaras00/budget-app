@@ -41,7 +41,11 @@ const LoginForm = () => {
     try {
       const requestOptions = setRequestOptions("POST", data, null);
 
-      const response = await fetch("/api/user/login", requestOptions);
+      let url = "https://nextbudget-server.onrender.com/api/user/login";
+      if (process.env.REACT_APP_ENV === "development") {
+        url = "/api/user/login";
+      }
+      const response = await fetch(url, requestOptions);
       const responseData = await response.json();
 
       if (response.status !== 200) {

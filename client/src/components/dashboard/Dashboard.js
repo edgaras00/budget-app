@@ -3,7 +3,7 @@ import { ThemeContext } from "../../context/themeContext";
 
 import Activity from "./Activity";
 import Analytics from "./Analytics";
-import GoalsButton from "./GoalsButton";
+import ManageAccounts from "./ManageAccounts";
 import Breakdown from "./Breakdown";
 
 import "./styles/dashboard.css";
@@ -30,12 +30,14 @@ const Dashboard = () => {
   const sortData = async (col, order) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(
-        `/api/transactions/user?sort=${col}&order=${order}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+
+      let url = `https://nextbudget-server.onrender.com/api/transactions/user?sort=${col}&order=${order}`;
+      if (process.env.REACT_APP_ENV === "development") {
+        url = `/api/transactions/user?sort=${col}&order=${order}`;
+      }
+      const response = await fetch(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
       const responseData = await response.json();
       setTransactions([...responseData.data.transactions]);
     } catch (error) {
@@ -74,7 +76,12 @@ const Dashboard = () => {
       try {
         if (!token) return;
 
-        const response = await fetch("/api/transactions/user", {
+        let url =
+          "https://nextbudget-server.onrender.com/api/transactions/user";
+        if (process.env.REACT_APP_ENV === "development") {
+          url = "/api/transactions/user";
+        }
+        const response = await fetch(url, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const responseData = await response.json();
@@ -98,7 +105,12 @@ const Dashboard = () => {
     const fetchSpendingBreakdown = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("/api/transactions/breakdown", {
+        let url =
+          "https://nextbudget-server.onrender.com/api/transactions/breakdown";
+        if (process.env.REACT_APP_ENV === "development") {
+          url = "/api/transactions/breakdown";
+        }
+        const response = await fetch(url, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -124,7 +136,12 @@ const Dashboard = () => {
     const fetchMonthlySpending = async () => {
       const token = localStorage.getItem("token");
       try {
-        const response = await fetch("/api/transactions/monthly", {
+        let url =
+          "https://nextbudget-server.onrender.com/api/transactions/monthly";
+        if (process.env.REACT_APP_ENV === "development") {
+          url = "/api/transactions/monthly";
+        }
+        const response = await fetch(url, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const responseData = await response.json();
@@ -144,7 +161,7 @@ const Dashboard = () => {
       }`}
     >
       <div className="goals-btn-container">
-        <GoalsButton text="Manage Accounts" type={2} link="/accounts" />
+        <ManageAccounts text="Manage Accounts" type={2} link="/accounts" />
       </div>
       <Activity
         transactions={transactions}

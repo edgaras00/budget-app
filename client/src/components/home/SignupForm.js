@@ -56,7 +56,12 @@ const SignupForm = () => {
         },
         null
       );
-      const response = await fetch("/api/user/signup", requestOptions);
+
+      let url = "https://nextbudget-server.onrender.com/api/user/signup";
+      if (process.env.REACT_APP_ENV === "development") {
+        url = "/api/user/signup";
+      }
+      const response = await fetch(url, requestOptions);
       const responseData = await response.json();
 
       if (response.status !== 201) {
