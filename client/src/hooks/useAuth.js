@@ -7,7 +7,12 @@ const useAuth = () => {
   useEffect(() => {
     const validateToken = async (token) => {
       try {
-        const response = await fetch("/api/user/validate", {
+        let url = "https://nextbudget-server.onrender.com/api/user/validate";
+        if (process.env.REACT_APP_ENV === "development") {
+          url = "/api/user/validate";
+        }
+
+        const response = await fetch(url, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!response.ok) {
