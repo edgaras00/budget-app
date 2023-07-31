@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const catchAsync = require("../../utils/catchAsync");
 
 const User = require("../models/user");
-const AppError = require("../../utils/AppError");
+const AppError = require("../../utils/appError");
 
 const signToken = (id) => {
   const token = jwt.sign({ id }, process.env.JWT_SECRET, {
