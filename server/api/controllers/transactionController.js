@@ -95,8 +95,6 @@ exports.getUserTransactions = catchAsync(async (req, res) => {
     return transaction;
   });
 
-  console.log(userTransactions);
-
   res.status(200).json({
     status: "success",
     results: transactions.length,
