@@ -146,7 +146,7 @@ const Transaction = ({
   return (
     <tr
       className={`table-row ${theme === "dark" ? "table-row-dark" : null}`}
-      onClick={width <= 420 && !isModalOpen ? handleModalOpen : null}
+      onClick={width <= 450 && !isModalOpen ? handleModalOpen : null}
     >
       <td className="transaction">
         <div className="image-container">

@@ -195,7 +195,7 @@
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 450px) {
   .table-row td {
     height: 80px;
   }

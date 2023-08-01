@@ -178,7 +178,7 @@ const TransactionForm = ({
       }`}
     >
       <div className="transaction-form-heading">
-        <h1>Add Transaction</h1>
+        <h1>{modify ? "Edit" : "Add"} Transaction</h1>
       </div>
       <form className="transaction-form" onSubmit={handleSubmit(onSubmit)}>
         <div className="input-wrapper">
