@@ -17,6 +17,7 @@ import { colors } from "../../utils/categoryColors";
 import "./styles/analytics.css";
 
 const Analytics = ({ monthlySpending, categories }) => {
+  console.log(monthlySpending);
   const { theme } = useContext(ThemeContext);
 
   const bars = categories.map((category) => (

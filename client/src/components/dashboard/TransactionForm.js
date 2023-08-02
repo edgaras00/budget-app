@@ -156,6 +156,7 @@ const TransactionForm = ({
       if (process.env.REACT_APP_ENV === "development") {
         url = `/api/transactions/${modify ? id : ""}`;
       }
+      console.log(url);
       const response = await fetch(url, requestOptions);
 
       if (!response.ok) {

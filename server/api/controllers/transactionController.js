@@ -218,14 +218,15 @@ exports.getMonthlySpending = catchAsync(async (req, res) => {
   const spendingByMonth = {};
   for (const txn of categoryTransactions) {
     const date = dayjs.utc(txn.month).format("MMM-YY");
+    const amount = Number(txn.amount);
     if (date in spendingByMonth) {
       if (txn["category.name"] in spendingByMonth[date]) {
-        spendingByMonth[date][txn["category.name"]] += txn.amount;
+        spendingByMonth[date][txn["category.name"]] += amount;
       } else {
-        spendingByMonth[date][txn["category.name"]] = txn.amount;
+        spendingByMonth[date][txn["category.name"]] = amount;
       }
     } else {
-      spendingByMonth[date] = { [txn["category.name"]]: txn.amount };
+      spendingByMonth[date] = { [txn["category.name"]]: amount };
     }
   }
 

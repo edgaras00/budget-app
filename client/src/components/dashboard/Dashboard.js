@@ -145,6 +145,7 @@ const Dashboard = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
         const responseData = await response.json();
+        console.log(responseData.data);
         setMonthlySpending(responseData.data.monthlyTransactions);
         setCategories(responseData.data.categories);
       } catch (error) {
