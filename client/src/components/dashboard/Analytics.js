@@ -47,8 +47,11 @@ const Analytics = ({ monthlySpending, categories }) => {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" className="test" />
-          <XAxis dataKey="name" tick={{ stroke: "#fff" }} />
-          <YAxis tick={{ stroke: "#fff" }} />
+          <XAxis
+            dataKey="name"
+            tick={{ stroke: theme === "dark" ? "#fff" : "#797979" }}
+          />
+          <YAxis tick={{ stroke: theme === "dark" ? "#fff" : "#797979" }} />
           <Tooltip />
           <Legend />
           {bars}

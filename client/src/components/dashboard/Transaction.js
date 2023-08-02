@@ -88,7 +88,7 @@ const Transaction = ({
     case "healthcare":
       defaultImg = healthcareImage;
       break;
-    case "grocieries":
+    case "groceries":
       defaultImg = groceriesImage;
       break;
     case "subscriptions":
@@ -169,7 +169,9 @@ const Transaction = ({
       </td>
       <td className="transaction-amount">${amount}</td>
       <td>
-        <div className={`category ${category.toLowerCase()}`}>{category}</div>
+        <div className={`category ${category.toLowerCase()}`}>
+          {category === "food" ? "Food and Drink" : category}
+        </div>
       </td>
       <td className="transaction-account">
         <div className="txn-account-name">{account}</div>
