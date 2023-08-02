@@ -21,3 +21,5 @@ https://nextbudget.onrender.com
 <img src="docs/accounts.png" width="500px">
 <br/>
 <img src="docs/bar.png" width="500px"/>
+<br/>
+<img src="docs/mobile.jpg" width="300px">
