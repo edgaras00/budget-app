@@ -45,6 +45,7 @@ app.use("/api/user", userRouter);
 app.use("/api/transactions", transactionRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/account", accountRouter);
+app.use("/", (req, res) => res.status(200).send("Welcome"));
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
