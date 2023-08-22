@@ -1,0 +1,22 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 4rem;
+}
+
+.login-container-dark {
+  color: #ffffff;
+}
+
+.login-heading {
+  text-align: center;
+}
+
+@media (max-width: 590px) {
+  .login-heading {
+    width: 80%;
+  }
+}

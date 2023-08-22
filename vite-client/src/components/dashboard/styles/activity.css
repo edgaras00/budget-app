@@ -1,0 +1,181 @@
+.activity-container {
+  width: 780px;
+  min-height: 250px;
+  margin-top: 2rem;
+  padding-top: 0.9rem;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.activity-container-dark {
+  background-color: #333333;
+  color: #e6e6e6;
+}
+
+.activity-top {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.activity-headers {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 2px solid rgb(192, 192, 192);
+  margin-top: 2rem;
+  padding-bottom: 1.5rem;
+}
+
+.activity-heading {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.activity-options {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 40%;
+}
+
+.select-option {
+  border: 1px solid rgb(192, 192, 192);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 18px;
+  width: 110px;
+  padding: 1.4rem 0.4rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.select-option:hover {
+  background-color: rgb(243, 243, 243);
+}
+
+.select-option-dark {
+  background-color: #383838;
+  border: 1px solid rgb(128, 128, 128);
+}
+
+.select-option-dark:hover {
+  background-color: rgb(94, 94, 94);
+}
+
+.empty-list {
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+
+.transaction-table {
+  margin-top: 1.8rem;
+  width: 100%;
+}
+
+.transaction-table th {
+  padding-bottom: 2rem;
+}
+
+.table-header {
+  cursor: pointer;
+}
+
+.remove-th {
+  color: transparent;
+}
+
+.filter {
+  width: 28px;
+  height: 28px;
+}
+
+.add {
+  cursor: pointer;
+  background-color: #333333;
+  width: 44px;
+  height: 44px;
+}
+
+.add:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 750px) {
+  .activity-container {
+    width: 84%;
+  }
+
+  .activity-options {
+    width: 60%;
+  }
+}
+
+@media (max-width: 650px) {
+  .activity-options {
+    width: 68%;
+  }
+}
+
+@media (max-width: 630px) {
+  .activity-container {
+    width: 92%;
+  }
+}
+
+@media (max-width: 550px) {
+  .activity-container {
+    width: 95%;
+  }
+
+  .activity-options {
+    width: 56%;
+  }
+
+  .select-option {
+    width: 80px;
+    padding: 1rem 0.4rem;
+  }
+  .select-option div {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .activity-container {
+    width: 98%;
+  }
+
+  .transaction-table th {
+    font-size: 0.9rem;
+  }
+
+  .select-option {
+    width: 75px;
+    padding: 0.9rem 0.3rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .activity-container {
+    width: 94%;
+  }
+
+  .add {
+    width: 40px;
+    height: 40px;
+  }
+
+  .filter {
+    width: 23px;
+    height: 23px;
+  }
+}
